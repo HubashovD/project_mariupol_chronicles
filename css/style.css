@@ -33,27 +33,201 @@
     width: 100%;
 }
 
+.share-btn {
+    font-family: 'Noto Sans', sans-serif;
+    letter-spacing: 1px;
+    text-align: center;
+    line-height: 1.6;
+}
+
+.fa-facebook {
+    letter-spacing: 1px;
+    text-align: center;
+    -webkit-font-smoothing: antialiased;
+    display: inline-block;
+    font-style: normal;
+    font-variant: normal;
+    text-rendering: auto;
+    font-family: "Font Awesome 5 Brands";
+    box-sizing: content-box;
+    margin: 0.5em;
+    cursor: pointer;
+    width: 1em;
+    height: 1em;
+    border: 1px solid #616161;
+    color: #a6a6a6;
+    border-radius: 50%;
+    padding: 0.5em;
+    font-size: 2.0em;
+    line-height: 1;
+    transition: all 0.5s;
+    stroke: white;
+}
+
+.fa-twitter {
+    letter-spacing: 1px;
+    text-align: center;
+    -webkit-font-smoothing: antialiased;
+    display: inline-block;
+    font-style: normal;
+    font-variant: normal;
+    text-rendering: auto;
+    font-family: "Font Awesome 5 Brands";
+    box-sizing: content-box;
+    margin: 0.5em;
+    cursor: pointer;
+    width: 1em;
+    height: 1em;
+    border: 1px solid #616161;
+    color: #a6a6a6;
+    border-radius: 50%;
+    padding: 0.5em;
+    font-size: 2.0em;
+    line-height: 1;
+    transition: all 0.5s;
+}
+
+#socio-icons {
+    margin-left: 3vw;
+    font-family: 'Roboto Mono', monospace;
+    display: flex;
+    -webkit-box-pack: start;
+    justify-content: flex-start;
+    position: absolute;
+}
+
+.icon-wrapper {
+    font-family: 'Roboto Mono', monospace;
+    display: flex;
+    -webkit-box-pack: start;
+    justify-content: flex-start;
+}
+
+#tw {
+    font-family: 'Roboto Mono', monospace;
+    margin-left: 0.5vw;
+}
+
+#fb {
+    font-family: 'Roboto Mono', monospace;
+}
+
+#menu-wrapper {
+    grid-template-columns: 1fr 6fr;
+    width: 100%;
+    display: grid;
+    z-index: 999;
+}
+
+#main-logo {
+    grid-column: 1;
+    position: relative;
+    margin-left: 3vw;
+    margin-top: 2vh;
+    width: 10vw;
+    z-index: 999;
+}
+
+.rubrics-container {
+    grid-column: 2;
+    margin-top: 1%;
+    position: relative;
+    font-family: 'ProximaNova', sans-serif;
+    font-size: 20px;
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    z-index: 999;
+}
+
+.rubric {
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: white;
+    margin: auto;
+}
+
+.rubric a span {
+    color: white !important;
+}
+
+.header-wrapper {
+    font-family: 'Roboto Mono', monospace;
+    width: 90%;
+    margin: 10px auto 50px auto;
+    -webkit-box-align: center;
+    align-items: center;
+    position: absolute;
+    z-index: 999;
+}
+
 #main-header {
-    width: 100vw;
-    height: 500px;
-    border: dashed;
+    height: 100vh;
+    width: 100%;
+    margin-left: -1em;
+    display: flex;
+    /* background-image: url('https://texty.github.io/project_russian_war_structure/pic/cover.png'); */
+    /* background-size: cover; */
+    overflow-x: hidden;
+}
+
+.title-wrapper {
+    max-width: 80%;
+    margin: auto !important;
+    z-index: 999;
+}
+
+h1.title {
+    color: white;
+    font-family: "proxima-bold";
+    font-size: calc(50px + 1.5vw);
+    font-weight: 800;
+    letter-spacing: 5px;
+    text-align: center;
+    text-transform: uppercase;
+    margin-bottom: 1em !important;
+}
+
+.title-wrapper h3 {
+    font-family: 'proxima-bold';
+    color: white;
+    text-transform: none;
+    text-align: center;
+    font-size: calc(20px + 0.7vw);
 }
 
 #lead {
     width: 100%;
     height: 300px;
     border: dashed;
+    margin-bottom: 50vh;
+    position: relative;
 }
 
 .static-block {
     position: fixed;
-    top: 20px;
+    top: -1px;
     width: 100%;
     height: 90vh;
-    background-color: #f0f0f0;
-    z-index: -1;
     font-size: 10ch;
     align-content: right;
+}
+
+#mask {
+    background-color: grey;
+    opacity: 0.8;
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: -1px;
+}
+
+#map {
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: -1px;
 }
 
 .civic {
@@ -73,6 +247,7 @@
 .step {
     position: relative;
     min-height: 500px;
+    height: 100vh;
     width: 30vw;
     background-color: #d8d8d8;
     font-family: 'proxima';
