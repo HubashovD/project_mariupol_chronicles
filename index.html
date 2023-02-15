@@ -1,109 +1,89 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-	<meta charset="UTF-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Document</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-	<link rel="stylesheet" href="css/main.css">
-	<script src="js/app.js" defer></script>
+    <link rel="stylesheet" href="./css/style.css" />
 
+    <script src="https://unpkg.com/scrollama"></script>
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+    <title>Document</title>
 </head>
+
 <body>
+    <div id='main'>
+        <div id='main-header'>main-header</div>
+        <article>
+            <div id="main-table">
+                <div id='text-box'>
+                    <div class='usual-text-block civic step' data-step="civic">
+                        <h5>0</h5>
+                        23 лютого в Маріуполі було тепло, десь +15, це не звично навіть для південного міста. І незвичайно тихий. Такий тихий, що аж моторошно. Можливо, це відчуття тривоги, яке ширилось містом того вечора, виникло не просто так. Дуже дивні речі напередодні відбувались
+                        в окупованому Донецьку. Тривоги, якісь незрозумілі обстріли, примусова евакуація людей. Росіяни не займались евакуацією всі 8 років війни, а тут раптом… Все говорило про те, що щось страшне насувається на нас всіх. Але в той теплий
+                        тихий вечір не хотілось про це думати. На пірсі було повно людей. Люди гуляли, вдихали солоне морське повітря і закарбовували цю красу і тишу в своєму серці. Так, на всяк випадок, а раптом це в останнє…
+                    </div>
+                    <div class='usual-text-block war step' data-step="war">
+                        <h5>1</h5>
+                        За кілька днів до 24 лютого керівництво військових частин та правоохоронців міста не мало сумнівів щодо повномасштабного вторгнення. В «Азові» (тоді – Окремий загін спецпризначення – ОСЗП, тепер – штурмова бригада у складі Нацгвардії – Ред) розробили
+                        протоколи дій: особовий склад -- у вищій готовності, важка техніка виїхала у район Мангуша під виглядом навчань. Патрульна поліція побудувала укріплення навколо своєї бази, провела навчання із розгортання особового складу та швидкісного
+                        супроводження автоколон. На лінії зіткнення на схід від міста загострення почалось задовго до 24 лютого – 36 ОБрМП, яка займала позиції на лінії від Піщовика до узбережжя Азовського моря, зазнавала ударів, але тримала лінію оборони.
+                    </diV>
+                    <div class='usual-text-block civic step' data-step="civic">
+                        <h5>2</h5>
+                        Десь о 5 ранку Маріуполь здригнувся від канонади. Небо над Лівобережжям було червоне. Завили сирени, попереджаючи про повітряну тривогу, і це виття чомусь переривалось якоюсь дивною попсовою музикою. Просто сюр, який лякав. Як і в 2014-му, Лівобережжя
+                        та мікрорайон Східний першими потрапили під обстріли ворожої артилерії. А селища на околицях Маріуполя – Талаківка, Сартана, Старий Крим, Гнутове – прокинулись від обстрілів ще раніше, близько четвертої ранку. Важкий ранок. Кожен
+                        мав обрати для себе стратегію поведінки. І треба сказати, що більшість людей в Маріуполі обрали тактику, якій слідкували всі останні 8 років гібридної війни – що б не відбувалось, треба йти на роботу. Так сталося і цього разу.
+                        Заводські автобуси везли людей на комбінати, немов і не трапилось нічого. Бо заводи для маріупольців протягом десятків років були острівцем стабільності і зрозумілості. Що б не відбувалось – сталь вариться. Навіть під час Другої
+                        світової війни так було. Але не зараз. Вже в перший день війни керівництво комбінату імені Ілліча та «Азовсталі» ухвалили рішення про призупинення виробництва. Спочатку це була так звана «гаряча» зупинка, яка дозволила б швидко
+                        перезапустити виробництво. Але швидко зрозуміли, що треба зупиняти металургійні печі. Прийшла війна.
+                    </div>
+                    <div class='usual-text-block war step' data-step="war">
+                        <h5>3</h5>
+                        Путін завершив свою нічну промову (з 23 на 24 лютого) і в ту ж хвилину у Маріуполі почались вибухи. Їх чули аж за 15 кілометрів на захід від міста. Першими удар прийняли морпіхи 36 ОБрМП на сході Маріуполя. Ось як розповідає про той день Кирило «Лірік»,
+                        командир взводу 36 ОБрМП, що був на позиції біля селища Піщовик: «О п’ятій ранку нам прилетіли близько 20 снарядів з “градів”. Перебило світло, але шкоди від них було менше, ніж від “120-х” мін напередодні. О 6.30 запрацювати міномети.
+                        Зв’язок глушили, дізнатися загальну обстановку майже нереально. Трохи згодом почули гуркіт важкої техніки. Наступала російська танкова дивізія. Нам вдалося підбити один танк, але цього було замало. Знову запрацювали міномети, на
+                        горизонті з’явилися перші БМП-2 противника з піхотою. Одну з них ми підбили гранатометом. Вдалося зв’язатися з командуванням – отримали команду відходити, сили мали нерівні. Встигли взяти лише найважливіше: документи, тепловізор
+                        та “нічник”, радіостанції та прилади спостереження. Боєкомплект забрати не могли – його підпалили, разом з ним згоріла і решта речей. Відійшли до тилового пункту управління. Дорогою нас забрав БТР. Далі потрібно було дійти до наступної
+                        лінії оборони, поповнити боєкомплект і зайняти інші позиції.
+                    </div>
+                </div>
+                <div class='static-block'></div>
+            </div>
+        </article>
 
-	<div class="container">
-		<section class="gallery">
 
-			<div class="frame">
-				<div class="frame__content">
-					<h2>Beautiful World</h2>
-				</div>
-			</div>
+    </div>
+    <script>
+        // instantiate the scrollama
+        const scroller = scrollama();
 
-			<div class="frame">
-				<div class="frame__content">
-					<div class="frame-media frame-media_left" style="background-image: url(images/1.jpg)"></div>
-				</div>
-			</div>
-
-			<div class="frame frame_bg">
-				<div class="frame__content">
-					<video class="frame-media frame-media_right" src="media/video_optimized.mp4" autoplay loop muted></video>
-				</div>
-			</div>
-
-			<div class="frame"></div>
-
-			<div class="frame">
-				<div class="frame__content text-right">
-					<h3>Pure planet</h3>
-					<p>Lorem ipsum dolor sit amet, consectetur elit adipisicing. Nemo fugit, rerum dolorem assumenda consequatur dicta error iure laboriosam temporibus.</p>
-				</div>
-			</div>
-
-			<div class="frame frame_bg">
-				<div class="frame__content">
-					<div class="frame-media frame-media_left" style="background-image: url(images/2.jpg)"></div>
-				</div>
-			</div>
-
-			<div class="frame"></div>
-
-			<div class="frame frame_bg">
-				<div class="frame__content">
-					<div class="frame-media frame-media_right" style="background-image: url(images/3.jpg)"></div>
-				</div>
-			</div>
-
-			<div class="frame"></div>
-
-			<div class="frame">
-				<div class="frame__content text-left">
-					<h3>Ask the Mountains</h3>
-					<p>Lorem ipsum dolor sit amet, consectetur elit. Rerum dolorem assumenda consequatur dicta error iure laboriosam temporibus omnis quae eaque aliquam esse unde accusamus dolores non soluta.</p>
-				</div>
-			</div>
-
-			<div class="frame frame_bg">
-				<div class="frame__content">
-					<div class="frame-media frame-media_right" style="background-image: url(images/4.jpg)"></div>
-				</div>
-			</div>
-
-			<div class="frame">
-				<div class="frame__content">
-					<video class="frame-media frame-media_left" src="media/video_optimized.mp4" autoplay loop muted></video>
-				</div>
-			</div>
-
-			<div class="frame"></div>
-			<div class="frame"></div>
-
-			<div class="frame frame_bg">
-				<div class="frame__content">
-					<div class="frame-media frame-media_right" style="background-image: url(images/5.jpg)"></div>
-				</div>
-			</div>
-
-			<div class="frame frame_bg">
-				<div class="frame__content">
-					<video class="frame-media" src="media/video_optimized.mp4" autoplay loop muted></video>
-				</div>
-			</div>
-
-			<div class="frame"></div>
-			<div class="frame"></div>
-
-			<div class="frame">
-				<div class="frame__content">© WebDesign Master</div>
-			</div>
-
-		</section>
-	</div>
-
-	<img class="soundbutton paused" src="images/sound.gif" alt="Alt">
-	<audio class="audio" src="media/ambient.mp3" loop></audio>
-
+        // setup the instance, pass callback functions
+        scroller
+            .setup({
+                step: ".step",
+            })
+            .onStepEnter((response) => {
+                if (response.index == 0) {
+                    console.log(response.index)
+                    console.log(response.element.attributes[1].nodeValue)
+                    d3.select(".static-block").text(response.index + ' ' + response.element.attributes[1].nodeValue)
+                } else if (response.index == 1) {
+                    console.log(response.index)
+                    console.log(response.element.attributes[1].nodeValue)
+                    d3.select(".static-block").text(response.index + ' ' + response.element.attributes[1].nodeValue)
+                } else if (response.index == 2) {
+                    console.log(response.index)
+                    console.log(response.element.attributes[1].nodeValue)
+                    d3.select(".static-block").text(response.index + ' ' + response.element.attributes[1].nodeValue)
+                }
+            })
+            .onStepExit((response) => {
+                // { element, index, direction }
+            });
+    </script>
 </body>
+
 </html>
