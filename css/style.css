@@ -205,6 +205,26 @@ h1.title {
     position: relative;
 }
 
+#stiky-header {
+    position: sticky;
+    top: 0;
+    height: 10vh;
+    width: 100%;
+    background-color: #F6F6F4;
+    z-index: 999;
+}
+
+#date-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+#civic-date #war-date {
+    opacity: 0.2;
+    font-size: 18px;
+    margin: auto;
+}
+
 .static-block {
     position: fixed;
     top: -1px;
