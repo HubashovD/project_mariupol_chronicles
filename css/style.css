@@ -38,6 +38,7 @@
     letter-spacing: 1px;
     text-align: center;
     line-height: 1.6;
+    color: black;
 }
 
 .fa-facebook {
@@ -61,7 +62,7 @@
     font-size: 2.0em;
     line-height: 1;
     transition: all 0.5s;
-    stroke: white;
+    stroke: black;
 }
 
 .fa-twitter {
@@ -144,12 +145,12 @@
 .rubric {
     text-transform: uppercase;
     letter-spacing: 0.5px;
-    color: white;
+    color: black;
     margin: auto;
 }
 
 .rubric a span {
-    color: white !important;
+    color: black !important;
 }
 
 .header-wrapper {
@@ -179,7 +180,7 @@
 }
 
 h1.title {
-    color: white;
+    color: black;
     font-family: "proxima-bold";
     font-size: calc(50px + 1.5vw);
     font-weight: 800;
@@ -191,7 +192,7 @@ h1.title {
 
 .title-wrapper h3 {
     font-family: 'proxima-bold';
-    color: white;
+    color: black;
     text-transform: none;
     text-align: center;
     font-size: calc(20px + 0.7vw);
@@ -214,6 +215,16 @@ h1.title {
     z-index: 999;
 }
 
+#date-placeholder {
+    font-family: 'proxima-bold';
+    font-size: calc(20px + 0.9vw);
+    margin: auto;
+    margin-top: auto;
+    display: flex;
+    height: 5vh;
+    justify-content: space-around;
+}
+
 #date-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -223,6 +234,26 @@ h1.title {
     opacity: 0.2;
     font-size: 18px;
     margin: auto;
+    width: 50vw;
+}
+
+#war-date {
+    border-left: solid black;
+}
+
+#civic-date {
+    border-right: solid black;
+}
+
+.date-type {
+    font-family: 'proxima-bold';
+    font-size: calc(20px + 0.3vw);
+    /* margin: auto; */
+    /* margin-top: auto; */
+    width: auto;
+    display: flex;
+    justify-content: space-around;
+    height: 5vh;
 }
 
 .static-block {
@@ -259,7 +290,8 @@ h1.title {
 
 #map {
     width: 100vw;
-    height: 100vh;
+    height: 95vh;
+    margin-top: 5vh;
     position: fixed;
     top: -1px;
 }

@@ -12,6 +12,7 @@ d3.csv("./data/data.csv").then(function(data) {
             .attr("data-step", element.type)
             .attr("date", element.date)
             .attr("coords", element.coordinates)
+            .attr("coords-text", element.coordinates_text)
 
         d3.select("#step-" + element.step)
             .append('div')
