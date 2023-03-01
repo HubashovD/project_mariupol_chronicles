@@ -23,6 +23,38 @@
              d3.select("#civic-date")
                  .style('opacity', '1')
          }
+
+         //  console.log([response.element.attributes[4].nodeValue.split(",")[0], response.element.attributes[4].nodeValue.split(",")[1]])
+         if (response.element.attributes[4].nodeValue != "") {
+             map.flyTo([response.element.attributes[4].nodeValue.split(",")[0], response.element.attributes[4].nodeValue.split(",")[1]], 15);
+
+             var circle = L.circle([response.element.attributes[4].nodeValue.split(",")[0], response.element.attributes[4].nodeValue.split(",")[1]], {
+                 color: 'red',
+                 fillColor: '#f03',
+                 fillOpacity: 0.5,
+                 radius: 100
+             }).addTo(map);
+
+             d3.select('#mask')
+                 .transition()
+                 .duration(3000)
+                 .style('opacity', '0')
+
+         } else {
+             d3.select('#mask')
+                 .transition()
+                 .duration(3000)
+                 .style('opacity', '1')
+
+         }
+
+
+
+
+
+
+
+
      })
      .onStepExit((response) => {
          // { element, index, direction }
