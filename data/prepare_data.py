@@ -7,6 +7,7 @@ del df_civil['war']
 del df_civil['coordinates_war']
 del df_civil['video_war']
 del df_civil['photo_war']
+del df_civil['war_header']
 del df_civil['coordinates_war_text']
 df_civil = df_civil[~df_civil['civil'].isna()]
 df_civil['type'] = ['civic' for i in df_civil['civil']]
@@ -18,6 +19,7 @@ del df_war['civil']
 del df_war['coordinates_civil']
 del df_war['video_civil']
 del df_war['photo_civil']
+del df_war['civil_header']
 del df_war['coordinates_civil_text']
 df_war = df_war[~df_war['war'].isna()]
 df_war['type'] = ['war' for i in df_war['war']]
@@ -28,13 +30,15 @@ df_civil.rename(columns={'civil' : 'text',
                          'coordinates_civil':'coordinates', 
                          'coordinates_civil_text' : 'coordinates_text',
                          'video_civil' :'video',
-                         'photo_civil' :'photo'}, inplace=True)
+                         'photo_civil' :'photo',
+                         'civil_header' :'header'}, inplace=True)
 
 df_war.rename(columns={'war' : 'text',
                        'coordinates_war':'coordinates',
                        'coordinates_war_text' : 'coordinates_text',
                        'video_war' :'video',
-                       'photo_war' :'photo'}, inplace=True)
+                       'photo_war' :'photo',
+                       'war_header' : 'header'}, inplace=True)
 
 df = pd.concat([df_civil, df_war])
 df = df.sort_values('date')
