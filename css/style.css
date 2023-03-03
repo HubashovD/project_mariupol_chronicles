@@ -308,7 +308,11 @@ h1.title {
     position: relative;
     min-height: fit-content;
     height: 100vh;
-    /* background-color: #d8d8d8; */
     font-family: 'proxima';
     font-size: calc(14px + 0.5vw);
+}
+
+.step p {
+    background-color: #F6F6F4;
+    padding: 1vh 1vw 1vh 1vw;
 }
