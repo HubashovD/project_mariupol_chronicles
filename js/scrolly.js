@@ -7,6 +7,7 @@
          step: ".step",
      })
      .onStepEnter((response) => {
+         map.flyTo([47.11, 37.57], 12);
          console.log(response.index)
          console.log(response.element.attributes)
 
