@@ -13,6 +13,9 @@ d3.csv("./data/data.csv").then(function(data) {
             .attr("date", element.date)
             .attr("coords", element.coordinates)
             .attr("coords-text", element.coordinates_text)
+            .attr('map_poly', element.map_poly)
+            .attr('map_lines', element.map_lines)
+            .attr('map_points', element.map_points)
             // .attr("header", element.header)
 
         d3.select("#step-" + element.step)
@@ -30,18 +33,31 @@ d3.csv("./data/data.csv").then(function(data) {
                     .attr("src", "./photo/" + element.photo)
             } else if (element.video != "") {
                 d3.select("#grid-step-" + element.step)
-                    .append('video')
-                    .attr("id", "vid-step-" + element.step)
-                    .attr("width", '320')
-                    .attr("height", '240')
-                    // .attr("autoplay")
-                    // .attr("muted")
-                    // .attr("controls")
+                    .append('div')
+                    .attr("id", "div-vid-step-" + element.step)
 
-                d3.select("#vid-step-" + element.step)
-                    .append('source')
-                    .attr("src", "./video/" + element.video)
-                    .attr("type", "video/mp4")
+                d3.select("#div-vid-step-" + element.step)
+                    .html('<video class =  "war-video" id="vid-step-' + element.step + '" width="80%" muted autoplay controls><source src="./video/' + element.video + '" type="video/mp4"></video>')
+
+                // video
+                //     .append('video')
+                //     .attr("id", "vid-step-" + element.step)
+                //     .attr("width", '320')
+                //     .attr("height", '240')
+                //     .attr("muted")
+
+
+                // d3.select("#vid-step-" + element.step)
+                //     .append('source')
+                //     .attr("src", "./video/" + element.video)
+                //     .attr("type", "video/mp4")
+
+                // document.getElementById("vid-step-" + element.step).setAttribute("muted");
+
+                // video
+                //     .attr("autoplay")
+                //     .attr("muted")
+                //     .attr("controls")
             } else {
                 d3.select("#grid-step-" + element.step)
                     .append('div')
@@ -95,18 +111,30 @@ d3.csv("./data/data.csv").then(function(data) {
                     .attr("src", "./photo/" + element.photo)
             } else if (element.video != "") {
                 d3.select("#grid-step-" + element.step)
-                    .append('video')
-                    .attr("id", "vid-step-" + element.step)
-                    .attr("width", '320')
-                    .attr("height", '240')
-                    // .attr("autoplay")
-                    // .attr("muted")
-                    // .attr("controls")
+                    .append('div')
+                    .attr("id", "div-vid-step-" + element.step)
 
-                d3.select("#vid-step-" + element.step)
-                    .append('source')
-                    .attr("src", "./video/" + element.video)
-                    .attr("type", "video/mp4")
+                d3.select("#div-vid-step-" + element.step)
+                    .html('<video class =  "civil-video" id="vid-step-' + element.step + '" width="80%" muted autoplay controls><source src="./video/' + element.video + '" type="video/mp4"></video>')
+                    // video = d3.select("#grid-step-" + element.step)
+
+                // video
+                //     .append('video')
+                //     .attr("id", "vid-step-" + element.step)
+                //     .attr("width", '320')
+                //     .attr("height", '240')
+
+
+                // d3.select("#vid-step-" + element.step)
+                //     .append('source')
+                //     .attr("src", "./video/" + element.video)
+                //     .attr("type", "video/mp4")
+
+                // video
+                //     .attr("autoplay")
+                //     .attr("muted")
+                //     .attr("controls")
+
             } else {
                 d3.select("#grid-step-" + element.step)
                     .append('div')

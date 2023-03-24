@@ -15,10 +15,12 @@
          console.log(date)
          console.log('.frontline' + date.slice(0, -2) + prev_date.toString())
 
-         d3.selectAll('.frontline' + date.slice(0, -2) + prev_date.toString())
-             .transition()
-             .duration(500)
-             .remove()
+         try {
+             d3.selectAll('.frontline' + date.slice(0, -2) + prev_date.toString())
+                 .transition()
+                 .duration(500)
+                 .remove()
+         } catch {}
 
 
 
@@ -141,6 +143,64 @@
 
 
          }
+         console.log(response.element.attributes)
+             //  map_poly
+         if (response.element.attributes.map_poly.nodeValue != "") {
+             try {
+                 fetch("topo/" + response.element.attributes[6].nodeValue)
+                     .then(function(response) {
+                         return response.json();
+                     })
+                     .then(function(data) {
+                         geoData = L.geoJSON(data, {
+                             style: frontLineStyles,
+                         })
+                         geoData.setStyle({ 'className': 'topo-elements' + response.element.attributes.date.nodeValue })
+                         geoData.addTo(map);
+                     });
+             } catch {}
+         }
+
+
+
+
+
+         //  map_lines
+         if (response.element.attributes.map_lines.nodeValue != "") {
+             try {
+                 fetch("topo/" + response.element.attributes[6].nodeValue)
+                     .then(function(response) {
+                         return response.json();
+                     })
+                     .then(function(data) {
+                         geoData = L.geoJSON(data, {
+                             style: frontLineStyles,
+                         })
+                         geoData.setStyle({ 'className': 'topo-elements' + response.element.attributes.date.nodeValue })
+                         geoData.addTo(map);
+                     });
+             } catch {}
+         }
+
+
+
+         //  map_points
+         if (response.element.attributes.map_lines.nodeValue != "") {
+
+             try {
+                 fetch("topo/" + response.element.attributes[6].nodeValue)
+                     .then(function(response) {
+                         return response.json();
+                     })
+                     .then(function(data) {
+                         geoData = L.geoJSON(data, {
+                             style: frontLineStyles,
+                         })
+                         geoData.setStyle({ 'className': 'topo-elements' + response.element.attributes.date.nodeValue })
+                         geoData.addTo(map);
+                     });
+             } catch {}
+         }
      })
      .onStepExit((response) => {
 
@@ -148,11 +208,22 @@
          console.log('frontline' + response.element.attributes.date.nodeValue)
          map.flyTo([47.11, 37.57], 12);
 
+         d3.selectAll('.topo-elements' + response.element.attributes.date.nodeValue)
+             .attr('opacity', '0')
+             //  .transition()
+             //  .duration(500)
+             //  .remove()
 
+         d3.selectAll('.frontline' + response.element.attributes.date.nodeValue)
+             .attr('opacity', '0')
+             //  .transition()
+             //  .duration(500)
+             //  .remove()
 
 
          d3.selectAll('.point')
-             .transition()
-             .duration(500)
-             .remove()
+             .attr('opacity', '0')
+             //  .transition()
+             //  .duration(500)
+             //  .remove()
      });

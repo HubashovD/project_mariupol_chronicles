@@ -321,3 +321,11 @@ h1.title {
     font-family: 'proxima-bold';
     font-size: calc(16px + 0.3vw);
 }
+
+.war-video {
+    margin-left: 10%;
+}
+
+.civil-video {
+    margin-right: 10%;
+}
