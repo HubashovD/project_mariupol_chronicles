@@ -1,6 +1,10 @@
  // instantiate the scrollama
  const scroller = scrollama();
 
+ var TopolayerGroupPoly = L.layerGroup().addTo(map);
+ var TopolayerGroupLine = L.layerGroup().addTo(map);
+ var TopolayerGroupPoint = L.layerGroup().addTo(map);
+ var FrontlayerGroup = L.layerGroup().addTo(map);
  // setup the instance, pass callback functions
  scroller
      .setup({
@@ -12,8 +16,8 @@
 
          var prev_date = parseInt(date.slice(-2, )) - 1
 
-         console.log(date)
-         console.log('.frontline' + date.slice(0, -2) + prev_date.toString())
+         //  console.log(date)
+         //  console.log('.frontline' + date.slice(0, -2) + prev_date.toString())
 
          try {
              d3.selectAll('.frontline' + date.slice(0, -2) + prev_date.toString())
@@ -27,8 +31,8 @@
 
 
          map.flyTo([47.11, 37.57], 12);
-         console.log("enter: " + response.index)
-         console.log(response.element.attributes)
+         //  console.log("enter: " + response.index)
+         //  console.log(response.element.attributes)
 
          d3.select("#date-placeholder").text(response.element.attributes[3].nodeValue)
 
@@ -63,50 +67,10 @@
                  "stroke-width": 10
              };
 
-
-             //  var svg = d3.select(map.getPanes().overlayPane).append("svg"),
-             //      g = svg.append("g").attr("class", "leaflet-zoom-hide");
-
-             //  console.log("https://raw.githubusercontent.com/HubashovD/project_mariupol_chronicles/main/maps/" + response.element.attributes[3].nodeValue + ".geojson")
-
-             //  d3.json("/maps/" + response.element.attributes.date.nodeValue + ".geojson", function(data) {
-             //      console.log(data)
-             //  })
-
-             //  d3.json("/maps/" + response.element.attributes.date.nodeValue + ".geojson", function(collection) {
-             //      console.log(collection)
-
-
-             //  function projectPoint(x, y) {
-             //      var point = map.latLngToLayerPoint(new L.LatLng(y, x));
-             //      this.stream.point(point.x, point.y);
-             //  }
-
-             //  var transform = d3.geo.transform({ point: projectPoint }),
-             //      path = d3.geo.path().projection(transform);
-
-             //  var feature = g.selectAll("path")
-             //      .data(collection.features)
-             //      .enter().append("path");
-
-             //  feature.attr("d", path);
-
-             //  var bounds = path.bounds(collection),
-             //      topLeft = bounds[0],
-             //      bottomRight = bounds[1];
-
-
-             //  svg.attr("width", bottomRight[0] - topLeft[0])
-             //      .attr("height", bottomRight[1] - topLeft[1])
-             //      .style("left", topLeft[0] + "px")
-             //      .style("top", topLeft[1] + "px");
-
-             //  g.attr("transform", "translate(" + -topLeft[0] + "," + -topLeft[1] + ")");
-
-             // code here
-             //  });
-
-             console.log(d3.selectAll('.frontline' + response.element.attributes.date.nodeValue))
+             var LineStyles = {
+                 "stroke-width": 10,
+                 "color": "red"
+             }
 
              try {
                  fetch("./maps/" + response.element.attributes[3].nodeValue + ".geojson")
@@ -114,11 +78,15 @@
                          return response.json();
                      })
                      .then(function(data) {
+
+                         FrontlayerGroup.eachLayer(function(layer) {
+                             FrontlayerGroup.removeLayer(layer);
+                         });
                          geoData = L.geoJSON(data, {
                              style: frontLineStyles,
                          })
                          geoData.setStyle({ 'className': 'frontline' + response.element.attributes.date.nodeValue })
-                         geoData.addTo(map);
+                         geoData.addTo(FrontlayerGroup);
                      });
              } catch {}
 
@@ -139,86 +107,151 @@
                  .transition()
                  .duration(100)
                  .style('opacity', '0.8')
-
-
-
          }
-         console.log(response.element.attributes)
-             //  map_poly
+
+
+         if (response.element.attributes.map_poly.nodeValue == "") {
+             try {
+                 TopolayerGroupPoly.eachLayer(function(layer) {
+                     TopolayerGroupPoly.removeLayer(layer);
+                 });
+             } catch {}
+         }
+
+         if (response.element.attributes.map_lines.nodeValue == "") {
+             try {
+                 TopolayerGroupLine.eachLayer(function(layer) {
+                     TopolayerGroupLine.removeLayer(layer);
+                 });
+             } catch {}
+         }
+
+         if (response.element.attributes.map_points.nodeValue == "") {
+             try {
+                 TopolayerGroupPoint.eachLayer(function(layer) {
+                     TopolayerGroupPoint.removeLayer(layer);
+                 });
+             } catch {}
+         }
+
+
+
+
+
          if (response.element.attributes.map_poly.nodeValue != "") {
+             d3.select('#mask')
+                 .transition()
+                 .duration(100)
+                 .style('opacity', '0')
              try {
                  fetch("topo/" + response.element.attributes[6].nodeValue)
                      .then(function(response) {
                          return response.json();
                      })
                      .then(function(data) {
+                         TopolayerGroupPoly.eachLayer(function(layer) {
+                             TopolayerGroupPoly.removeLayer(layer);
+                         });
                          geoData = L.geoJSON(data, {
-                             style: frontLineStyles,
-                         })
-                         geoData.setStyle({ 'className': 'topo-elements' + response.element.attributes.date.nodeValue })
-                         geoData.addTo(map);
+                                 style: frontLineStyles,
+                             })
+                             //  geoData.setStyle({ 'className': 'topo-elements' + response.element.attributes.date.nodeValue })
+                         geoData.addTo(TopolayerGroupPoly);
                      });
              } catch {}
          }
 
-
-
-
-
-         //  map_lines
          if (response.element.attributes.map_lines.nodeValue != "") {
+             d3.select('#mask')
+                 .transition()
+                 .duration(100)
+                 .style('opacity', '0')
+             console.log(response.element.attributes.map_lines.nodeValue)
              try {
-                 fetch("topo/" + response.element.attributes[6].nodeValue)
+                 fetch("topo/" + response.element.attributes.map_lines.nodeValue)
                      .then(function(response) {
                          return response.json();
                      })
                      .then(function(data) {
+                         TopolayerGroupLine.eachLayer(function(layer) {
+                             TopolayerGroupLine.removeLayer(layer);
+                         });
                          geoData = L.geoJSON(data, {
-                             style: frontLineStyles,
-                         })
-                         geoData.setStyle({ 'className': 'topo-elements' + response.element.attributes.date.nodeValue })
-                         geoData.addTo(map);
+                                 style: LineStyles,
+                             })
+                             //  geoData.setStyle({ 'className': 'topo-elements' + response.element.attributes.date.nodeValue })
+                         geoData.addTo(TopolayerGroupLine);
                      });
              } catch {}
          }
 
-
-
-         //  map_points
-         if (response.element.attributes.map_lines.nodeValue != "") {
-
+         if (response.element.attributes.map_points.nodeValue != "") {
+             d3.select('#mask')
+                 .transition()
+                 .duration(100)
+                 .style('opacity', '0')
              try {
-                 fetch("topo/" + response.element.attributes[6].nodeValue)
+                 fetch("topo/" + response.element.attributes.map_points.nodeValue)
                      .then(function(response) {
                          return response.json();
                      })
-                     .then(function(data) {
-                         geoData = L.geoJSON(data, {
-                             style: frontLineStyles,
-                         })
-                         geoData.setStyle({ 'className': 'topo-elements' + response.element.attributes.date.nodeValue })
-                         geoData.addTo(map);
+
+                 .then(function(data) {
+                     TopolayerGroupPoint.eachLayer(function(layer) {
+                         TopolayerGroupPoint.removeLayer(layer);
                      });
+                     geoData = L.geoJSON(data, {
+                         style: frontLineStyles,
+                     })
+                     geoData.setStyle({ 'className': 'topo-elements' + response.element.attributes.date.nodeValue })
+                     geoData.addTo(TopolayerGroupPoint);
+                 });
              } catch {}
          }
      })
      .onStepExit((response) => {
 
-         console.log("exit: " + response.index)
-         console.log('frontline' + response.element.attributes.date.nodeValue)
+         //  console.log("exit: " + response.index)
+         //  console.log('frontline' + response.element.attributes.date.nodeValue)
          map.flyTo([47.11, 37.57], 12);
 
-         d3.selectAll('.topo-elements' + response.element.attributes.date.nodeValue)
-             .attr('opacity', '0')
-             //  .transition()
-             //  .duration(500)
-             //  .remove()
+         //  d3.selectAll('.topo-elements' + response.element.attributes.date.nodeValue)
+         //      .transition()
+         //      .duration(500)
+         //      .attr('opacity', '0')
 
-         d3.selectAll('.frontline' + response.element.attributes.date.nodeValue)
-             .attr('opacity', '0')
-             //  .transition()
-             //  .duration(500)
-             //  .remove()
+         //   .remove()
+
+
+         //  if (response.element.attributes.map_poly.nodeValue != "") {
+         //      try {
+         //          TopolayerGroupPoly.eachLayer(function(layer) {
+         //              TopolayerGroupPoly.removeLayer(layer);
+         //          });
+         //      } catch {}
+         //  }
+
+         //  if (response.element.attributes.map_lines.nodeValue != "") {
+         //      try {
+         //          TopolayerGroupLine.eachLayer(function(layer) {
+         //              TopolayerGroupLine.removeLayer(layer);
+         //          });
+         //      } catch {}
+         //  }
+
+         //  if (response.element.attributes.map_points.nodeValue != "") {
+         //      try {
+         //          TopolayerGroupPoint.eachLayer(function(layer) {
+         //              TopolayerGroupPoint.removeLayer(layer);
+         //          });
+         //      } catch {}
+         //  }
+
+         //  d3.selectAll('.frontline' + response.element.attributes.date.nodeValue)
+         //      .transition()
+         //      .duration(500)
+         //      .attr('opacity', '0')
+         //      //  .remove()
 
 
          d3.selectAll('.point')
