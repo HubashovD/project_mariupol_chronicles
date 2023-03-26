@@ -16,6 +16,8 @@ d3.csv("./data/data.csv").then(function(data) {
             .attr('map_poly', element.map_poly)
             .attr('map_lines', element.map_lines)
             .attr('map_points', element.map_points)
+            .attr('zoom', element.zoom)
+            .attr('focus_point', element.focus_point)
             // .attr("header", element.header)
 
         d3.select("#step-" + element.step)

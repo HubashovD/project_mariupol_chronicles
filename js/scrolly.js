@@ -5,6 +5,26 @@
  var TopolayerGroupLine = L.layerGroup().addTo(map);
  var TopolayerGroupPoint = L.layerGroup().addTo(map);
  var FrontlayerGroup = L.layerGroup().addTo(map);
+
+
+ var frontLineStyles = {
+     "color": "#f3a6b2",
+     "fillColor": "#f3a6b2",
+     "stroke-width": 10
+ }
+
+ var LineStyles = {
+     "stroke-width": 10,
+     "color": "red"
+ }
+
+ var polyStyles = {
+     "color": "	#DCDCDC",
+     "fillColor": "	#696969",
+     "stroke-width": 10
+ }
+
+
  // setup the instance, pass callback functions
  scroller
      .setup({
@@ -14,17 +34,17 @@
 
          var date = response.element.attributes.date.nodeValue
 
-         var prev_date = parseInt(date.slice(-2, )) - 1
+         //  var prev_date = parseInt(date.slice(-2, )) - 1
 
          //  console.log(date)
          //  console.log('.frontline' + date.slice(0, -2) + prev_date.toString())
 
-         try {
-             d3.selectAll('.frontline' + date.slice(0, -2) + prev_date.toString())
-                 .transition()
-                 .duration(500)
-                 .remove()
-         } catch {}
+         //  try {
+         //      d3.selectAll('.frontline' + date.slice(0, -2) + prev_date.toString())
+         //          .transition()
+         //          .duration(500)
+         //          .remove()
+         //  } catch {}
 
 
 
@@ -48,8 +68,26 @@
                  .style('opacity', '1')
          }
 
+         try {
+             fetch("./maps/" + response.element.date.nodeValue + ".geojson")
+                 .then(function(response) {
+                     return response.json();
+                 })
+                 .then(function(data) {
+
+                     FrontlayerGroup.eachLayer(function(layer) {
+                         FrontlayerGroup.removeLayer(layer);
+                     });
+                     geoData = L.geoJSON(data, {
+                         style: frontLineStyles,
+                     })
+                     geoData.setStyle({ 'className': 'frontline' + response.element.attributes.date.nodeValue })
+                     geoData.addTo(FrontlayerGroup);
+                 });
+         } catch {}
+
          //  console.log([response.element.attributes[4].nodeValue.split(",")[0], response.element.attributes[4].nodeValue.split(",")[1]])
-         if (response.element.attributes[4].nodeValue != "") {
+         if (response.element.attributes.coords.nodeValue != "") {
              //  map.flyTo([response.element.attributes[4].nodeValue.split(",")[0], response.element.attributes[4].nodeValue.split(",")[1]], 15);
 
              var circle = L.circle([response.element.attributes[4].nodeValue.split(",")[0], response.element.attributes[4].nodeValue.split(",")[1]], {
@@ -60,35 +98,6 @@
              })
              circle.setStyle({ 'className': 'point' })
              circle.addTo(map);
-
-             var frontLineStyles = {
-                 "color": "#f3a6b2",
-                 "fillColor": "#f3a6b2",
-                 "stroke-width": 10
-             };
-
-             var LineStyles = {
-                 "stroke-width": 10,
-                 "color": "red"
-             }
-
-             try {
-                 fetch("./maps/" + response.element.attributes[3].nodeValue + ".geojson")
-                     .then(function(response) {
-                         return response.json();
-                     })
-                     .then(function(data) {
-
-                         FrontlayerGroup.eachLayer(function(layer) {
-                             FrontlayerGroup.removeLayer(layer);
-                         });
-                         geoData = L.geoJSON(data, {
-                             style: frontLineStyles,
-                         })
-                         geoData.setStyle({ 'className': 'frontline' + response.element.attributes.date.nodeValue })
-                         geoData.addTo(FrontlayerGroup);
-                     });
-             } catch {}
 
              circle.bindPopup(response.element.attributes[5].nodeValue, { closeButton: false }).openPopup()
 
@@ -108,7 +117,6 @@
                  .duration(100)
                  .style('opacity', '0.8')
          }
-
 
          if (response.element.attributes.map_poly.nodeValue == "") {
              try {
@@ -134,10 +142,6 @@
              } catch {}
          }
 
-
-
-
-
          if (response.element.attributes.map_poly.nodeValue != "") {
              d3.select('#mask')
                  .transition()
@@ -153,8 +157,9 @@
                              TopolayerGroupPoly.removeLayer(layer);
                          });
                          geoData = L.geoJSON(data, {
-                                 style: frontLineStyles,
-                             })
+                             style: polyStyles,
+                         })
+                         console.log(geoData)
                              //  geoData.setStyle({ 'className': 'topo-elements' + response.element.attributes.date.nodeValue })
                          geoData.addTo(TopolayerGroupPoly);
                      });
@@ -208,51 +213,34 @@
                  });
              } catch {}
          }
+
+         if (response.element.attributes.zoom.nodeValue != "") {
+             var lat = response.element.attributes.focus_point.nodeValue.split(",")[0]
+             var lon = response.element.attributes.focus_point.nodeValue.split(",")[1]
+             var zoom = response.element.attributes.zoom.nodeValue
+             console.log(lat, lon, zoom)
+             map.flyTo([lat, lon], response.element.attributes.zoom.nodeValue);
+         } else {
+             map.flyTo([47.11, 37.57], 12);
+         }
+
+
+
      })
      .onStepExit((response) => {
+
+         if (response.index == 0 && response.direction == 'up') {
+             d3.select('#mask')
+                 .transition()
+                 .duration(100)
+                 .style('opacity', '0.8')
+
+             map.flyTo([49.46236693239768, 32.04686624407093], 8)
+         }
 
          //  console.log("exit: " + response.index)
          //  console.log('frontline' + response.element.attributes.date.nodeValue)
          map.flyTo([47.11, 37.57], 12);
-
-         //  d3.selectAll('.topo-elements' + response.element.attributes.date.nodeValue)
-         //      .transition()
-         //      .duration(500)
-         //      .attr('opacity', '0')
-
-         //   .remove()
-
-
-         //  if (response.element.attributes.map_poly.nodeValue != "") {
-         //      try {
-         //          TopolayerGroupPoly.eachLayer(function(layer) {
-         //              TopolayerGroupPoly.removeLayer(layer);
-         //          });
-         //      } catch {}
-         //  }
-
-         //  if (response.element.attributes.map_lines.nodeValue != "") {
-         //      try {
-         //          TopolayerGroupLine.eachLayer(function(layer) {
-         //              TopolayerGroupLine.removeLayer(layer);
-         //          });
-         //      } catch {}
-         //  }
-
-         //  if (response.element.attributes.map_points.nodeValue != "") {
-         //      try {
-         //          TopolayerGroupPoint.eachLayer(function(layer) {
-         //              TopolayerGroupPoint.removeLayer(layer);
-         //          });
-         //      } catch {}
-         //  }
-
-         //  d3.selectAll('.frontline' + response.element.attributes.date.nodeValue)
-         //      .transition()
-         //      .duration(500)
-         //      .attr('opacity', '0')
-         //      //  .remove()
-
 
          d3.selectAll('.point')
              .attr('opacity', '0')

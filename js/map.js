@@ -4,17 +4,18 @@ L.tileLayer('https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x
     attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
 }).addTo(map);
 
-var frontLineStyles = {
-    "color": "#f3a6b2",
-    "fillColor": "#f3a6b2",
-    "stroke-width": 10
-};
+var occupiedPolyStyles = {
+    "stroke-opacity": '0',
+    "Color": "#a57777",
+    "fillColor": "#a57777",
+    "stroke-width": "0"
+}
 
 fetch("./maps/occupied.geojson").then(function(response) {
     return response.json();
 }).then(function(data) {
     geoData = L.geoJSON(data, {
-        style: frontLineStyles,
+        style: occupiedPolyStyles,
     })
     geoData.setStyle({ 'className': 'occupied' })
     geoData.addTo(map);
