@@ -32,8 +32,11 @@ d3.csv("./data/data.csv").then(function(data) {
             if (element.photo != "") {
                 d3.select("#grid-step-" + element.step)
                     .append('img')
-                    .attr("class", "step-img")
+                    .attr("class", "war-step-img")
                     .attr("src", "./photo/" + element.photo)
+
+
+
             } else if (element.video != "") {
                 d3.select("#grid-step-" + element.step)
                     .append('div')
@@ -110,7 +113,7 @@ d3.csv("./data/data.csv").then(function(data) {
             if (element.photo != "") {
                 d3.select("#grid-step-" + element.step)
                     .append('img')
-                    .attr("class", "step-img")
+                    .attr("class", "civil-step-img")
                     .attr("src", "./photo/" + element.photo)
             } else if (element.video != "") {
                 d3.select("#grid-step-" + element.step)
