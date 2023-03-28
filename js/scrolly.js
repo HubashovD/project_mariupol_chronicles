@@ -35,6 +35,7 @@
          step: ".step",
      })
      .onStepEnter((response) => {
+
          try {
 
              fetch("./maps/" + response.element.attributes.date.nodeValue + ".geojson")
@@ -147,7 +148,14 @@
              var idToShow = response.element.attributes.idToShow.nodeValue.split(",")
          } catch { idToShow = [] }
 
-         console.log(idToShow)
+
+         function picnicFilter(feature) {
+             console.log(feature)
+             if (idToShow.includes(feature.properties.id.toString())) return true
+         }
+
+
+         //  console.log(idToShow)
          if (response.element.attributes.map_poly.nodeValue != "") {
              d3.select('#mask')
                  .transition()
@@ -162,7 +170,7 @@
                          TopolayerGroupPoly.eachLayer(function(layer) {
                              TopolayerGroupPoly.removeLayer(layer);
                          });
-                         geoData = L.geoJSON(data, {
+                         geoData = L.geoJSON(data, { filter: picnicFilter }, {
                              style: frontLineStyles
                          })
                          console.log(geoData)
@@ -174,8 +182,8 @@
                                  console.log(feature.properties.id.toString())
                                  if (idToShow.includes(feature.properties.id.toString())) {
                                      var circle = L.circle(layer.getBounds().getCenter(), {
-                                         color: 'red',
-                                         fillColor: '#f03',
+                                         color: 'None',
+                                         fillColor: 'None',
                                          fillOpacity: 0,
                                          radius: 100,
                                      })
