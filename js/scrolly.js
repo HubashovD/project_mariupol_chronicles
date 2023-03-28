@@ -35,10 +35,40 @@
          step: ".step",
      })
      .onStepEnter((response) => {
+         try {
 
-         var date = response.element.attributes.date.nodeValue
+             fetch("./maps/" + response.element.attributes.date.nodeValue + ".geojson")
+                 .then(function(response) {
+                     return response.json();
+                 })
+                 .then(function(data) {
+
+                     console.log(data)
+
+                     FrontlayerGroup.eachLayer(function(layer) {
+                         FrontlayerGroup.removeLayer(layer);
+                     });
+                     geoData = L.geoJSON(data, {
+                         style: frontLineStyles,
+                     })
+                     geoData.setStyle({ 'className': 'frontline' + response.element.attributes.date.nodeValue })
+                     geoData.addTo(FrontlayerGroup);
+                 });
+         } catch {}
+
 
          map.flyTo([47.11, 37.57], 12);
+
+         map.eachLayer(function(layer) {
+             layer.closePopup();
+         });
+
+         d3.selectAll('.point')
+             .attr('opacity', '0')
+
+
+
+         var date = response.element.attributes.date.nodeValue
 
          d3.select("#date-placeholder").text(response.element.attributes[3].nodeValue)
 
@@ -56,23 +86,7 @@
                  .text("ЦИВІЛЬНИЙ ПОГЛЯД")
          }
 
-         try {
-             fetch("./maps/" + response.element.date.nodeValue + ".geojson")
-                 .then(function(response) {
-                     return response.json();
-                 })
-                 .then(function(data) {
 
-                     FrontlayerGroup.eachLayer(function(layer) {
-                         FrontlayerGroup.removeLayer(layer);
-                     });
-                     geoData = L.geoJSON(data, {
-                         style: frontLineStyles,
-                     })
-                     geoData.setStyle({ 'className': 'frontline' + response.element.attributes.date.nodeValue })
-                     geoData.addTo(FrontlayerGroup);
-                 });
-         } catch {}
 
          //  console.log([response.element.attributes[4].nodeValue.split(",")[0], response.element.attributes[4].nodeValue.split(",")[1]])
          if (response.element.attributes.coords.nodeValue != "") {
@@ -256,15 +270,8 @@
              d3.select('#mask')
                  .transition()
                  .duration(100)
-                 .style('opacity', '0.8')
+                 .style('opacity', '1')
          }
 
-         map.flyTo([47.11, 37.57], 12);
 
-         map.eachLayer(function(layer) {
-             layer.closePopup();
-         });
-
-         d3.selectAll('.point')
-             .attr('opacity', '0')
      });

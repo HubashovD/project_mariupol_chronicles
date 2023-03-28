@@ -275,6 +275,7 @@ h1.title {
 .step-img {
     width: 30vw;
     margin: auto;
+    padding-bottom: 5vh;
 }
 
 .img {
@@ -283,7 +284,7 @@ h1.title {
 
 #mask {
     background-color: #F6F6F4;
-    opacity: 0.8;
+    opacity: 1;
     width: 100vw;
     height: 100vh;
     position: fixed;
@@ -325,7 +326,7 @@ h1.title {
 
 .war {
     background: black;
-    color: gray;
+    color: #ABABAB;
 }
 
 .date h5 {
