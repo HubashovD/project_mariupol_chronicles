@@ -235,24 +235,13 @@ h1.title {
     justify-content: space-around;
 }
 
-#date-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-}
+#type-placeholder {}
 
 #civic-date #war-date {
     opacity: 0.2;
     font-size: 18px;
     margin: auto;
     width: 50vw;
-}
-
-#war-date {
-    border-left: solid black;
-}
-
-#civic-date {
-    border-right: solid black;
 }
 
 .date-type {
@@ -275,10 +264,7 @@ h1.title {
     align-content: right;
 }
 
-.step-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-}
+.step-grid {}
 
 .step-grid p {
     margin-left: 5vw;
@@ -347,6 +333,9 @@ h1.title {
     height: 100vh;
     font-family: 'proxima';
     font-size: calc(14px + 0.5vw);
+    margin-bottom: 50vh;
+    width: 50vw;
+    margin-left: 25vw;
 }
 
 .inner-grid-step-mask {

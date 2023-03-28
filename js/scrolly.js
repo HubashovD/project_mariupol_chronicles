@@ -38,39 +38,34 @@
 
          var date = response.element.attributes.date.nodeValue
 
-         //  var prev_date = parseInt(date.slice(-2, )) - 1
-
-         //  console.log(date)
-         //  console.log('.frontline' + date.slice(0, -2) + prev_date.toString())
-
-         //  try {
-         //      d3.selectAll('.frontline' + date.slice(0, -2) + prev_date.toString())
-         //          .transition()
-         //          .duration(500)
-         //          .remove()
-         //  } catch {}
-
-
-
-
-
          map.flyTo([47.11, 37.57], 12);
-         //  console.log("enter: " + response.index)
-         //  console.log(response.element.attributes)
 
          d3.select("#date-placeholder").text(response.element.attributes[3].nodeValue)
 
          if (response.element.attributes[2].nodeValue == 'war') {
-             d3.select("#war-date")
-                 .style('opacity', '1')
-             d3.select("#civic-date")
-                 .style('opacity', '0.2')
+             d3.select('#type-placeholder')
+                 .transition()
+                 .duration(100)
+                 .text("Військовй погляд")
          } else {
-             d3.select("#war-date")
-                 .style('opacity', '0.2')
-             d3.select("#civic-date")
-                 .style('opacity', '1')
+             d3.select('#type-placeholder')
+                 .transition()
+                 .duration(100)
+                 .text("Цивільний погляд")
          }
+
+
+         //  if (response.element.attributes[2].nodeValue == 'war') {
+         //      d3.select("#war-date")
+         //          .style('opacity', '1')
+         //      d3.select("#civic-date")
+         //          .style('opacity', '0.2')
+         //  } else {
+         //      d3.select("#war-date")
+         //          .style('opacity', '0.2')
+         //      d3.select("#civic-date")
+         //          .style('opacity', '1')
+         //  }
 
          try {
              fetch("./maps/" + response.element.date.nodeValue + ".geojson")
@@ -218,31 +213,6 @@
                      });
              } catch {}
          }
-
-         //  if (response.element.attributes.map_points.nodeValue != "") {
-         //      d3.select('#mask')
-         //          .transition()
-         //          .duration(100)
-         //          .style('opacity', '0')
-         //      try {
-         //          fetch("topo/" + response.element.attributes.map_points.nodeValue)
-         //              .then(function(response) {
-         //                  return response.json();
-         //              })
-
-         //          .then(function(data) {
-         //              console.log(data)
-         //              TopolayerGroupPoint.eachLayer(function(layer) {
-         //                  TopolayerGroupPoint.removeLayer(layer);
-         //              });
-         //              geoData = L.geoJSON(data, {
-         //                  style: pointStyles,
-         //              })
-         //              geoData.setStyle({ 'className': 'topo-elements' + response.element.attributes.date.nodeValue })
-         //              geoData.addTo(TopolayerGroupPoint);
-         //          });
-         //      } catch {}
-         //  }
 
          if (response.element.attributes.map_points.nodeValue != "") {
              d3.select('#mask')
