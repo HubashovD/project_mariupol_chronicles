@@ -45,21 +45,27 @@ d3.csv("./data/data.csv").then(function(data) {
 
         if (element.photo != "") {
             d3.select("#grid-step-" + element.step)
+                .append("div")
+                .attr("id", "div-img-step-" + element.step)
+                .attr("class", "step-img")
+
+            d3.select("#div-img-step-" + element.step)
                 .append('img')
-                .attr("class", "war-step-img")
+                .attr("class", "img")
                 .attr("src", "./photo/" + element.photo)
 
         } else if (element.video != "") {
             d3.select("#grid-step-" + element.step)
                 .append('div')
                 .attr("id", "div-vid-step-" + element.step)
+                .attr("class", "video")
 
             d3.select("#div-vid-step-" + element.step)
-                .html('<video class =  "war-video" id="vid-step-' + element.step + '" width="80%" muted autoplay controls><source src="./video/' + element.video + '" type="video/mp4"></video>')
+                .html('<video  id="vid-step-' + element.step + '" width="100%" muted autoplay controls><source src="./video/' + element.video + '" type="video/mp4"></video>')
 
         } else {
-            d3.select("#grid-step-" + element.step)
-                .append('div')
+            // d3.select("#grid-step-" + element.step)
+            //     .append('div')
         }
 
 

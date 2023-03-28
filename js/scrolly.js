@@ -46,26 +46,15 @@
              d3.select('#type-placeholder')
                  .transition()
                  .duration(100)
-                 .text("Військовй погляд")
+                 .attr('class', 'date-type war')
+                 .text("ВІЙСЬКОВИЙ ПОГЛЯД")
          } else {
              d3.select('#type-placeholder')
                  .transition()
                  .duration(100)
-                 .text("Цивільний погляд")
+                 .attr('class', 'date-type')
+                 .text("ЦИВІЛЬНИЙ ПОГЛЯД")
          }
-
-
-         //  if (response.element.attributes[2].nodeValue == 'war') {
-         //      d3.select("#war-date")
-         //          .style('opacity', '1')
-         //      d3.select("#civic-date")
-         //          .style('opacity', '0.2')
-         //  } else {
-         //      d3.select("#war-date")
-         //          .style('opacity', '0.2')
-         //      d3.select("#civic-date")
-         //          .style('opacity', '1')
-         //  }
 
          try {
              fetch("./maps/" + response.element.date.nodeValue + ".geojson")
@@ -114,7 +103,7 @@
              d3.select('#mask')
                  .transition()
                  .duration(100)
-                 .style('opacity', '0.8')
+                 .style('opacity', '1')
          }
 
          if (response.element.attributes.map_poly.nodeValue == "") {
