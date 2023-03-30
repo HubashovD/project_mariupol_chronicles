@@ -335,11 +335,11 @@
      })
      .onStepExit((response) => {
          if (response.index == 0 && response.direction == 'up') {
-             map.flyTo([49.46236693239768, 32.04686624407093], 8)
+             map.flyTo([47.11, 37.57], 12)
              d3.select('#mask')
                  .transition()
                  .duration(100)
-                 .style('opacity', '1')
+                 .style('opacity', '0.5')
          }
 
 
