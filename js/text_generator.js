@@ -19,6 +19,7 @@ d3.csv("./data/data.csv").then(function(data) {
             .attr('zoom', element.zoom)
             .attr('focus_point', element.focus_point)
             .attr('idToShow', element.idToShow)
+            .attr('icons', element.icons)
 
         d3.select("#step-" + element.step)
             .append('div')

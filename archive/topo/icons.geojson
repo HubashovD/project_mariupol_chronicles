@@ -1,0 +1,17 @@
+{
+"type": "FeatureCollection",
+"name": "icons",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
+"features": [
+{ "type": "Feature", "properties": { "icon": "boom.svg", "text": "", "id": "1" }, "geometry": { "type": "Point", "coordinates": [ 37.764423744202759, 47.271798644959617 ] } },
+{ "type": "Feature", "properties": { "icon": "boom.svg", "text": "", "id": "2" }, "geometry": { "type": "Point", "coordinates": [ 37.784734770026517, 47.268378317098616 ] } },
+{ "type": "Feature", "properties": { "icon": "ship.svg", "text": "", "id": "3" }, "geometry": { "type": "Point", "coordinates": [ 37.624766909706587, 47.037702347867452 ] } },
+{ "type": "Feature", "properties": { "icon": "ship.svg", "text": "", "id": "4" }, "geometry": { "type": "Point", "coordinates": [ 37.603121582916309, 47.033458551674642 ] } },
+{ "type": "Feature", "properties": { "icon": "boom.svg", "text": "", "id": "5" }, "geometry": { "type": "Point", "coordinates": [ 37.467912418308543, 47.07487165281961 ] } },
+{ "type": "Feature", "properties": { "icon": "boom.svg", "text": "", "id": "6" }, "geometry": { "type": "Point", "coordinates": [ 37.451604295384357, 47.066995539985676 ] } },
+{ "type": "Feature", "properties": { "icon": "tank.svg", "text": "", "id": "7" }, "geometry": { "type": "Point", "coordinates": [ 37.458258400333541, 47.028353205744601 ] } },
+{ "type": "Feature", "properties": { "icon": "tank.svg", "text": "", "id": "8" }, "geometry": { "type": "Point", "coordinates": [ 37.463509914283499, 47.140378283645518 ] } },
+{ "type": "Feature", "properties": { "icon": "apc.svg", "text": "", "id": "9" }, "geometry": { "type": "Point", "coordinates": [ 37.512681316385354, 47.119848681844154 ] } },
+{ "type": "Feature", "properties": { "icon": "apc.svg", "text": "", "id": "10" }, "geometry": { "type": "Point", "coordinates": [ 37.51577888906678, 47.117280179487793 ] } }
+]
+}

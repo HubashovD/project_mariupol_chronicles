@@ -28,6 +28,10 @@
     src: url("../fonts/PROXIMA-NOVA-A-SEMIBOLD.OTF") format("opentype")
 }
 
+.polyStyles {
+    fill: 'red';
+}
+
 #main {
     height: 1500px;
     width: 100%;

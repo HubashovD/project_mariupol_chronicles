@@ -5,28 +5,37 @@
  var TopolayerGroupLine = L.layerGroup().addTo(map);
  var TopolayerGroupPoint = L.layerGroup().addTo(map);
  var FrontlayerGroup = L.layerGroup().addTo(map);
+ var IconlayerGroup = L.layerGroup().addTo(map);
 
 
  var frontLineStyles = {
      "color": "#f3a6b2",
      "fillColor": "#f3a6b2",
-     "stroke-width": 10
+     "width": 10
  }
 
  var LineStyles = {
-     "stroke-width": 10,
-     "color": "red"
+     dashArray: "3,5,3",
+     color: "red"
  }
 
  var polyStyles = {
-     "color": "	#DCDCDC",
-     "fillColor": "	#696969",
-     "stroke-width": 10
+     "opacity": 'none',
+     "color": "	#808080",
+     "fillColor": "#808080",
+     "width": "0"
  }
 
  var pointStyles = {
      "color": '#000000'
  }
+
+
+ var boomIcon = L.icon({
+     iconUrl: 'icons/boom.svg',
+
+     iconSize: [38, 95], // size of the icon
+ });
 
 
  // setup the instance, pass callback functions
@@ -50,9 +59,9 @@
                          FrontlayerGroup.removeLayer(layer);
                      });
                      geoData = L.geoJSON(data, {
-                         style: frontLineStyles,
-                     })
-                     geoData.setStyle({ 'className': 'frontline' + response.element.attributes.date.nodeValue })
+                             style: frontLineStyles,
+                         })
+                         //  geoData.setStyle({ 'className': 'frontline' + response.element.attributes.date.nodeValue })
                      geoData.addTo(FrontlayerGroup);
                  });
          } catch {}
@@ -78,18 +87,16 @@
                  .transition()
                  .duration(100)
                  .attr('class', 'date-type war')
-                 .text("ВІЙСЬКОВИЙ ПОГЛЯД")
+                 .text("ВІЙСЬКОВИЙ ВИМІР")
          } else {
              d3.select('#type-placeholder')
                  .transition()
                  .duration(100)
                  .attr('class', 'date-type')
-                 .text("ЦИВІЛЬНИЙ ПОГЛЯД")
+                 .text("ЦИВІЛЬНИЙ ВИМІР")
          }
 
 
-
-         //  console.log([response.element.attributes[4].nodeValue.split(",")[0], response.element.attributes[4].nodeValue.split(",")[1]])
          if (response.element.attributes.coords.nodeValue != "") {
              //  map.flyTo([response.element.attributes[4].nodeValue.split(",")[0], response.element.attributes[4].nodeValue.split(",")[1]], 15);
 
@@ -144,25 +151,34 @@
                  });
              } catch {}
          }
-         try {
-             var idToShow = response.element.attributes.idToShow.nodeValue.split(",")
-         } catch { idToShow = [] }
 
+         //  try {
+         //      var idToShow = response.element.attributes.idToShow.nodeValue.split(",")
+         //  } catch { idToShow = [] }
 
-         function picnicFilter(feature) {
-             console.log(feature)
-             if (idToShow.includes(feature.properties.id.toString())) return true
+         if (response.element.attributes.icons.nodeValue == "") {
+             IconlayerGroup.eachLayer(function(layer) {
+                 IconlayerGroup.removeLayer(layer);
+             });
          }
 
 
-         //  console.log(idToShow)
+         // polygons filter
+         try {
+             var map_poly = response.element.attributes.map_poly.nodeValue.split(",")
+         } catch { map_poly = [] }
+
+         function polyFilter(feature) {
+             if (map_poly.includes(feature.properties.id_.toString())) return true
+         }
+
          if (response.element.attributes.map_poly.nodeValue != "") {
              d3.select('#mask')
                  .transition()
                  .duration(100)
                  .style('opacity', '0')
              try {
-                 fetch("topo/" + response.element.attributes[6].nodeValue)
+                 fetch("topo/polys2.geojson")
                      .then(function(response) {
                          return response.json();
                      })
@@ -170,17 +186,14 @@
                          TopolayerGroupPoly.eachLayer(function(layer) {
                              TopolayerGroupPoly.removeLayer(layer);
                          });
-                         geoData = L.geoJSON(data, { filter: picnicFilter }, {
-                             style: frontLineStyles
+                         geoData = L.geoJSON(data, { filter: polyFilter }, {
+                             style: polyStyles,
                          })
-                         console.log(geoData)
-                             //  geoData.setStyle({ 'className': 'topo-elements' + response.element.attributes.date.nodeValue })
                          geoData.addTo(TopolayerGroupPoly);
 
                          L.geoJson(data, {
                              onEachFeature: function(feature, layer) {
-                                 console.log(feature.properties.id.toString())
-                                 if (idToShow.includes(feature.properties.id.toString())) {
+                                 if (map_poly.includes(feature.properties.id_.toString())) {
                                      var circle = L.circle(layer.getBounds().getCenter(), {
                                          color: 'None',
                                          fillColor: 'None',
@@ -201,14 +214,23 @@
              } catch {}
          }
 
+
+         // lines filter
+         try {
+             var map_lines = response.element.attributes.map_lines.nodeValue.split(",")
+         } catch { map_lines = [] }
+
+         function lineFilter(feature) {
+             if (map_lines.includes(feature.properties.id_.toString())) return true
+         }
+
          if (response.element.attributes.map_lines.nodeValue != "") {
              d3.select('#mask')
                  .transition()
                  .duration(100)
                  .style('opacity', '0')
-             console.log(response.element.attributes.map_lines.nodeValue)
              try {
-                 fetch("topo/" + response.element.attributes.map_lines.nodeValue)
+                 fetch("topo/lines.geojson")
                      .then(function(response) {
                          return response.json();
                      })
@@ -216,14 +238,21 @@
                          TopolayerGroupLine.eachLayer(function(layer) {
                              TopolayerGroupLine.removeLayer(layer);
                          });
-                         geoData = L.geoJSON(data, {
-                                 style: LineStyles,
-                             })
+
+                         geoData = L.geoJSON(data, { filter: lineFilter }, { "color": 'red' })
                              //  geoData.setStyle({ 'className': 'topo-elements' + response.element.attributes.date.nodeValue })
                          geoData.addTo(TopolayerGroupLine);
+
                      });
              } catch {}
          }
+
+
+
+         // points filter
+         try {
+             var map_points = response.element.attributes.map_points.nodeValue.split(",")
+         } catch { map_points = [] }
 
          if (response.element.attributes.map_points.nodeValue != "") {
              d3.select('#mask')
@@ -231,27 +260,28 @@
                  .duration(100)
                  .style('opacity', '0')
              try {
-                 fetch("topo/" + response.element.attributes.map_points.nodeValue)
+                 fetch("topo/points.geojson")
                      .then(function(response) {
                          return response.json();
                      })
                      .then(function(data) {
-                         //  console.log(data)
                          TopolayerGroupPoint.eachLayer(function(layer) {
                              TopolayerGroupPoint.removeLayer(layer);
                          });
                          data.features.forEach(element => {
-                             var circle = L.circle([element.geometry.coordinates[1], element.geometry.coordinates[0], ], {
-                                 color: 'red',
-                                 fillColor: '#f03',
-                                 fillOpacity: 0.5,
-                                 radius: 100,
-                             })
-                             circle.addTo(TopolayerGroupPoint);
-                             circle.bindPopup(element.properties.Name, {
-                                 closeButton: false,
-                                 autoClose: false
-                             }).openPopup()
+                             if (map_points.includes(element.properties.id_.toString())) {
+                                 var circle = L.circle([element.geometry.coordinates[1], element.geometry.coordinates[0], ], {
+                                     color: 'red',
+                                     fillColor: '#f03',
+                                     fillOpacity: 0.5,
+                                     radius: 100,
+                                 })
+                                 circle.addTo(TopolayerGroupPoint);
+                                 circle.bindPopup(element.properties.name, {
+                                     closeButton: false,
+                                     autoClose: false
+                                 }).openPopup()
+                             } else {}
                          });
                      });
              } catch {}
@@ -259,16 +289,47 @@
 
 
 
+
          if (response.element.attributes.zoom.nodeValue != "") {
              var lat = response.element.attributes.focus_point.nodeValue.split(",")[0]
              var lon = response.element.attributes.focus_point.nodeValue.split(",")[1]
              var zoom = response.element.attributes.zoom.nodeValue
-             console.log(lat, lon, zoom)
              map.flyTo([lat, lon], response.element.attributes.zoom.nodeValue);
          } else {
              map.flyTo([47.11, 37.57], 12);
          }
 
+         var icons = response.element.attributes.icons.nodeValue.split(',')
+         if (response.element.attributes.icons.nodeValue != "") {
+             d3.select('#mask')
+                 .transition()
+                 .duration(100)
+                 .style('opacity', '0')
+             try {
+                 fetch("topo/icons.geojson")
+                     .then(function(response) {
+                         return response.json();
+                     })
+                     .then(function(data) {
+                         IconlayerGroup.eachLayer(function(layer) {
+                             IconlayerGroup.removeLayer(layer);
+                         });
+                         L.geoJson(data, {
+                             onEachFeature: function(feature, layer) {
+                                 if (icons.includes(feature.properties.id.toString())) {
+                                     var greenIcon = L.icon({
+                                         iconUrl: './icons/' + feature.properties.icon,
+                                         iconSize: [38, 95], // size of the icon
+                                     });
+                                     L.marker([feature.geometry.coordinates[1], feature.geometry.coordinates[0]], { icon: greenIcon }).addTo(IconlayerGroup);
+                                 } else {}
+                             }
+                         })
+
+
+                     });
+             } catch {}
+         }
 
 
      })

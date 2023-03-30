@@ -5,10 +5,12 @@ L.tileLayer('https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x
 }).addTo(map);
 
 var occupiedPolyStyles = {
-    "stroke-opacity": '0',
-    "Color": "#a57777",
-    "fillColor": "#a57777",
-    "stroke-width": "0"
+    "color": "#A52A2A",
+    "fillColor": "#A52A2A",
+    "stroke-width": "0",
+    "stroke-opacity": "0",
+    "fill-opacity": "0.2",
+    "stroke": "#A52A2A"
 }
 
 fetch("./maps/occupied.geojson").then(function(response) {

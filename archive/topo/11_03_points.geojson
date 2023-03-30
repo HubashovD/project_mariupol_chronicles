@@ -1,0 +1,9 @@
+{
+"type": "FeatureCollection",
+"name": "11_03_points",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
+"features": [
+{ "type": "Feature", "properties": { "id": 13, "name": null }, "geometry": { "type": "Point", "coordinates": [ 37.489480064129623, 47.127148452487369 ] } },
+{ "type": "Feature", "properties": { "id": 13, "name": "???? ?????, ??? ???? ???????? ????" }, "geometry": { "type": "Point", "coordinates": [ 37.484798647679369, 47.129563648909219 ] } }
+]
+}
