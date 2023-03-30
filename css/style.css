@@ -72,8 +72,8 @@
         width: 100% !important;
     }
     .usual-text-block {
-        width: 90% !important;
-        margin-left: 10% !important;
+        width: 100% !important;
+        margin-left: 0 !important;
     }
     .date-type {
         width: auto !important;
@@ -85,7 +85,10 @@
         width: auto !important;
     }
     .video {
-        width: auto;
+        width: auto !important;
+    }
+    .step {
+        margin-left: 0 !important;
     }
 }
 

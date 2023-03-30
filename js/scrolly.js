@@ -356,7 +356,11 @@
              var lat = response.element.attributes.focus_point.nodeValue.split(",")[0]
              var lon = response.element.attributes.focus_point.nodeValue.split(",")[1]
              var zoom = response.element.attributes.zoom.nodeValue
-             map.flyTo([lat, lon], response.element.attributes.zoom.nodeValue);
+
+             if (window.screen.height > window.screen.width) {
+                 zoom = zoom - 1
+             }
+             map.flyTo([lat, lon], zoom);
          } else {
              map.flyTo([47.11, 37.57], 12);
          }
