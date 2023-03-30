@@ -5,12 +5,22 @@ L.tileLayer('https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x
 }).addTo(map);
 
 var occupiedPolyStyles = {
-    "color": "#A52A2A",
-    "fillColor": "#A52A2A",
+    "color": "#000000",
+    "fillColor": "#000000",
     "stroke-width": "0",
     "stroke-opacity": "0",
-    "fill-opacity": "0.2",
-    "stroke": "#A52A2A"
+    "fillOpacity": 0.8,
+    "stroke": false
+}
+
+
+var rusPolyStyles = {
+    "color": "#000000",
+    "fillColor": "#000000",
+    "stroke-width": "0",
+    "stroke-opacity": "0",
+    "fillOpacity": 1,
+    "stroke": false
 }
 
 fetch("./maps/occupied.geojson").then(function(response) {
@@ -22,6 +32,17 @@ fetch("./maps/occupied.geojson").then(function(response) {
     geoData.setStyle({ 'className': 'occupied' })
     geoData.addTo(map);
 });
+
+// fetch("./maps/russia.geojson").then(function(response) {
+//     return response.json();
+// }).then(function(data) {
+//     geoData = L.geoJSON(data, {
+//         style: rusPolyStyles,
+//     })
+//     geoData.setStyle({ 'className': 'occupied' })
+//     geoData.addTo(map);
+// });
+
 
 
 

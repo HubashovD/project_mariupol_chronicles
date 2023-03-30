@@ -28,6 +28,69 @@
     src: url("../fonts/PROXIMA-NOVA-A-SEMIBOLD.OTF") format("opentype")
 }
 
+@media (max-width: 479px) {
+    #main-logo {
+        width: 50% !important;
+    }
+    #fb {
+        width: 10vw !important;
+    }
+    #tw {
+        width: 10vw !important;
+    }
+    #cover {
+        height: 100% !important;
+    }
+    #title-wrapper {
+        margin-left: 0 !important;
+        margin-top: 30% !important;
+    }
+    .rubrics-container {
+        display: none !important;
+    }
+    #menu-wrapper {
+        display: block !important;
+    }
+    figure img {
+        width: 99vw !important;
+        margin-left: 0.5vw !important;
+        margin-right: 0.5vw !important;
+    }
+    figcaption {
+        margin-left: 0.5vw !important;
+        margin-right: 0.5vw !important;
+    }
+    #infoboard {
+        padding-top: 1vh !important;
+    }
+    h1.title {
+        letter-spacing: 1px !important;
+        font-size: calc(30px + 1.5vw) !important;
+    }
+    #main {
+        height: auto !important;
+        width: 100% !important;
+    }
+    .usual-text-block {
+        width: 90% !important;
+        margin-left: 10% !important;
+    }
+    .date-type {
+        width: auto !important;
+    }
+    .static-block {
+        height: 100vh !important;
+    }
+    .step-img {
+        width: auto !important;
+    }
+    .video {
+        width: auto;
+    }
+}
+
+@media (min-width: 480px) and (max-width: 1023px) {}
+
 .polyStyles {
     fill: 'red';
 }
@@ -122,6 +185,7 @@
     width: 100%;
     display: grid;
     z-index: 999;
+    background: #F6F6F4;
 }
 
 #main-logo {
@@ -239,7 +303,10 @@ h1.title {
     justify-content: space-around;
 }
 
-#type-placeholder {}
+#type-placeholder {
+    letter-spacing: .2rem;
+    max-width: 325px;
+}
 
 #civic-date #war-date {
     opacity: 0.2;
@@ -313,9 +380,9 @@ h1.title {
 .leaflet-popup-tip-container {}
 
 .leaflet-popup-content {
-    font-family: 'proxima';
-    font-size: calc(12px + 0.5vw);
-    text-shadow: 2px -2px 1px white;
+    font-family: 'proxima-bold';
+    font-size: calc(18px + 5vw);
+    text-shadow: 0px 0px 10px white;
 }
 
 .leaflet-popup-tip {
@@ -364,11 +431,16 @@ h1.title {
     padding-bottom: 5vh;
 }
 
+#map-place {
+    height: 100vh;
+}
+
 #footer {
     justify-content: space-between;
-    width: 100vw;
+    /* width: 100vw; */
     height: 100vh;
-    background-color: white;
+    /* background-color: black; */
+    color: #F6F6F4;
     position: relative;
     padding: auto;
 }

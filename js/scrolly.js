@@ -9,27 +9,29 @@
 
 
  var frontLineStyles = {
-     "color": "#f3a6b2",
-     "fillColor": "#f3a6b2",
-     "width": 10
+     "color": "#000000",
+     "fillColor": "#000000",
+     'fillOpacity': 0.6,
+     "stroke": false
  }
 
  var LineStyles = {
-     dashArray: "3,5,3",
-     color: "red"
+     "color": "#7DBCA5",
+     "fillColor": "#7DBCA5",
  }
 
- var polyStyles = {
-     "opacity": 'none',
-     "color": "	#808080",
-     "fillColor": "#808080",
-     "width": "0"
+ var ukrpolyStyles = {
+     "color": "#000000",
+     "fillColor": "#000000",
+     'fillOpacity': 0.6,
+     "stroke": false
  }
 
  var pointStyles = {
-     "color": '#000000'
- }
+     "fillColor": "#7DBCA5",
+     "color": '#426357'
 
+ }
 
  var boomIcon = L.icon({
      iconUrl: 'icons/boom.svg',
@@ -45,6 +47,61 @@
      })
      .onStepEnter((response) => {
 
+         if (response.index == 84 && response.direction == 'down') {
+             console.log(response.index, response.direction)
+             d3.select('#mask')
+                 .transition()
+                 .duration(1000)
+                 .style('opacity', '0')
+                 .style('background-color', 'black')
+
+         }
+
+         if (response.index == 84 && response.direction == 'up') {
+             console.log(response.index, response.direction)
+             d3.select('#mask')
+                 .transition()
+                 .duration(1000)
+                 .style('opacity', '0')
+                 .style('background-color', '#F6F6F4')
+
+             d3.selectAll('.only-for-black')
+                 .transition()
+                 .duration(1000)
+                 .style('opacity', '1')
+                 .style('background', '#F6F6F4')
+
+         }
+
+         if (response.index == 85 && response.direction == 'down') {
+             console.log(response.index, response.direction)
+             d3.select('#mask')
+                 .transition()
+                 .duration(1000)
+                 .style('opacity', '1')
+                 .style('background-color', 'black')
+
+             d3.selectAll('.only-for-black')
+                 .transition()
+                 .duration(1000)
+                 .style('opacity', '1')
+                 .style('background', 'black')
+
+
+         }
+
+         if (response.index == 85 && response.direction == 'up') {
+             console.log(response.index, response.direction)
+             d3.select('#mask')
+                 .transition()
+                 .duration(1000)
+                 .style('opacity', '0')
+
+
+
+
+         }
+
          try {
 
              fetch("./maps/" + response.element.attributes.date.nodeValue + ".geojson")
@@ -59,9 +116,8 @@
                          FrontlayerGroup.removeLayer(layer);
                      });
                      geoData = L.geoJSON(data, {
-                             style: frontLineStyles,
-                         })
-                         //  geoData.setStyle({ 'className': 'frontline' + response.element.attributes.date.nodeValue })
+                         style: frontLineStyles,
+                     })
                      geoData.addTo(FrontlayerGroup);
                  });
          } catch {}
@@ -76,22 +132,21 @@
          d3.selectAll('.point')
              .attr('opacity', '0')
 
-
-
-         var date = response.element.attributes.date.nodeValue
-
-         d3.select("#date-placeholder").text(response.element.attributes[3].nodeValue)
+         d3.select("#date-placeholder")
+             .transition()
+             .duration(500)
+             .text(response.element.attributes[3].nodeValue)
 
          if (response.element.attributes[2].nodeValue == 'war') {
              d3.select('#type-placeholder')
                  .transition()
-                 .duration(100)
+                 .duration(500)
                  .attr('class', 'date-type war')
                  .text("ВІЙСЬКОВИЙ ВИМІР")
          } else {
              d3.select('#type-placeholder')
                  .transition()
-                 .duration(100)
+                 .duration(500)
                  .attr('class', 'date-type')
                  .text("ЦИВІЛЬНИЙ ВИМІР")
          }
@@ -101,8 +156,8 @@
              //  map.flyTo([response.element.attributes[4].nodeValue.split(",")[0], response.element.attributes[4].nodeValue.split(",")[1]], 15);
 
              var circle = L.circle([response.element.attributes[4].nodeValue.split(",")[0], response.element.attributes[4].nodeValue.split(",")[1]], {
-                 color: 'red',
-                 fillColor: '#f03',
+                 color: '#426357',
+                 fillColor: "#7DBCA5",
                  fillOpacity: 0.5,
                  radius: 100,
              })
@@ -124,7 +179,7 @@
 
              d3.select('#mask')
                  .transition()
-                 .duration(100)
+                 .duration(500)
                  .style('opacity', '1')
          }
 
@@ -175,7 +230,7 @@
          if (response.element.attributes.map_poly.nodeValue != "") {
              d3.select('#mask')
                  .transition()
-                 .duration(100)
+                 .duration(500)
                  .style('opacity', '0')
              try {
                  fetch("topo/polys2.geojson")
@@ -183,24 +238,31 @@
                          return response.json();
                      })
                      .then(function(data) {
+
+
                          TopolayerGroupPoly.eachLayer(function(layer) {
                              TopolayerGroupPoly.removeLayer(layer);
                          });
+
+
                          geoData = L.geoJSON(data, { filter: polyFilter }, {
-                             style: polyStyles,
+                             style: ukrpolyStyles,
                          })
+
                          geoData.addTo(TopolayerGroupPoly);
+
+
 
                          L.geoJson(data, {
                              onEachFeature: function(feature, layer) {
                                  if (map_poly.includes(feature.properties.id_.toString())) {
                                      var circle = L.circle(layer.getBounds().getCenter(), {
-                                         color: 'None',
-                                         fillColor: 'None',
-                                         fillOpacity: 0,
-                                         radius: 100,
-                                     })
-                                     circle.setStyle({ 'className': 'point' })
+                                             color: 'None',
+                                             fillColor: 'None',
+                                             fillOpacity: 0,
+                                             radius: 100,
+                                         })
+                                         //  circle.setStyle({ 'className': 'point' })
                                      circle.addTo(map);
 
                                      circle.bindPopup(feature.properties.name, { closeButton: false, autoClose: false }).openPopup()
@@ -227,7 +289,7 @@
          if (response.element.attributes.map_lines.nodeValue != "") {
              d3.select('#mask')
                  .transition()
-                 .duration(100)
+                 .duration(500)
                  .style('opacity', '0')
              try {
                  fetch("topo/lines.geojson")
@@ -257,7 +319,7 @@
          if (response.element.attributes.map_points.nodeValue != "") {
              d3.select('#mask')
                  .transition()
-                 .duration(100)
+                 .duration(500)
                  .style('opacity', '0')
              try {
                  fetch("topo/points.geojson")
@@ -271,8 +333,8 @@
                          data.features.forEach(element => {
                              if (map_points.includes(element.properties.id_.toString())) {
                                  var circle = L.circle([element.geometry.coordinates[1], element.geometry.coordinates[0], ], {
-                                     color: 'red',
-                                     fillColor: '#f03',
+                                     color: '#426357',
+                                     fillColor: "#7DBCA5",
                                      fillOpacity: 0.5,
                                      radius: 100,
                                  })
@@ -303,7 +365,7 @@
          if (response.element.attributes.icons.nodeValue != "") {
              d3.select('#mask')
                  .transition()
-                 .duration(100)
+                 .duration(500)
                  .style('opacity', '0')
              try {
                  fetch("topo/icons.geojson")
@@ -338,7 +400,7 @@
              map.flyTo([47.11, 37.57], 12)
              d3.select('#mask')
                  .transition()
-                 .duration(100)
+                 .duration(500)
                  .style('opacity', '0.5')
          }
 
