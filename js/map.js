@@ -33,15 +33,15 @@ fetch("./maps/occupied.geojson").then(function(response) {
     geoData.addTo(map);
 });
 
-// fetch("./maps/russia.geojson").then(function(response) {
-//     return response.json();
-// }).then(function(data) {
-//     geoData = L.geoJSON(data, {
-//         style: rusPolyStyles,
-//     })
-//     geoData.setStyle({ 'className': 'occupied' })
-//     geoData.addTo(map);
-// });
+fetch("./maps/russia.geojson").then(function(response) {
+    return response.json();
+}).then(function(data) {
+    geoData = L.geoJSON(data, {
+        style: rusPolyStyles,
+    })
+    geoData.setStyle({ 'className': 'occupied' })
+    geoData.addTo(map);
+});
 
 
 

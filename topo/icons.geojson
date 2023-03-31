@@ -43,7 +43,7 @@
 { "type": "Feature", "properties": { "icon": "boom.svg", "text": null, "id": "23" }, "geometry": { "type": "Point", "coordinates": [ 37.698067228592222, 47.169560097387986 ] } },
 { "type": "Feature", "properties": { "icon": "boom.svg", "text": "", "id": "24" }, "geometry": { "type": "Point", "coordinates": [ 37.783119080587582, 47.264572932884413 ] } },
 { "type": "Feature", "properties": { "icon": "boom.svg", "text": "", "id": "25" }, "geometry": { "type": "Point", "coordinates": [ 37.581334170982515, 47.45161611460518 ] } },
-{ "type": "Feature", "properties": { "icon": "boom2.svg", "text": "", "id": "26" }, "geometry": { "type": "Point", "coordinates": [ 37.538667355007938, 47.213627122332113 ] } },
+{ "type": "Feature", "properties": { "icon": "boom2.svg", "text": "", "id": "26" }, "geometry": { "type": "Point", "coordinates": [ 37.538706110163837, 47.213497800361857 ] } },
 { "type": "Feature", "properties": { "icon": "boom2.svg", "text": null, "id": "27" }, "geometry": { "type": "Point", "coordinates": [ 37.706210288473017, 47.173238492616335 ] } },
 { "type": "Feature", "properties": { "icon": "tank.svg", "text": null, "id": "28" }, "geometry": { "type": "Point", "coordinates": [ 37.525775922122719, 47.225168288956532 ] } },
 { "type": "Feature", "properties": { "icon": "tank.svg", "text": null, "id": "28" }, "geometry": { "type": "Point", "coordinates": [ 37.544419093118869, 47.226906035234045 ] } },

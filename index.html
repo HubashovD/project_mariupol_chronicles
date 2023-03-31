@@ -5,14 +5,42 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="width=device-width, initial-scale=1" name="viewport" />
 
+    <!-- OpenGraph Meta Tags -->
+    <meta property="fb:app_id" content="329250623807149">
+    <meta property="og:site_name" content="ТЕКСТИ.ORG.UA">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="ВІЙНА. ПОЧАТОК. МАРІУПОЛЬ">
+    <meta property="og:image" content="./pic/cover.jpg">
+    <meta property="og:description" content="Російські війська стрімко наблизилися до Маріуполя із Заходу — напрямку, з якого ніхто не чекав на загрозу. Ми реконструювали ключові бої й важливі події в житті цивільних громадян у місті від 24 лютого до 16 березня.">
+    <meta property="og:url" content="https://texty.org.ua/d/2023/mariupol_chronicles/">
+
+
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:site" content="@textyorgua">
+    <meta property="twitter:account_id" content="49572937">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="./pic/cover.jpg">
+    <meta name="twitter:url" content="https://texty.org.ua/d/2023/mariupol_chronicles/">
+    <meta name="twitter:title" content="ВІЙНА. ПОЧАТОК. МАРІУПОЛЬ">
+    <meta name="twitter:description" content="Російські війська стрімко наблизилися до Маріуполя із Заходу — напрямку, з якого ніхто не чекав на загрозу. Ми реконструювали ключові бої й важливі події в житті цивільних громадян у місті від 24 лютого до 16 березня.">
+    <meta name="twitter:image:width" content="1200">
+    <meta name="twitter:image:height" content="630">
+
+    <!-- Other Meta Tags -->
+    <meta name="title" content="ВІЙНА. ПОЧАТОК. МАРІУПОЛЬ">
+    <meta name="description" content="Російські війська стрімко наблизилися до Маріуполя із Заходу — напрямку, з якого ніхто не чекав на загрозу. Ми реконструювали ключові бої й важливі події в житті цивільних громадян у місті від 24 лютого до 16 березня.">
+
+
+    <title>ВІЙНА. ПОЧАТОК. МАРІУПОЛЬ</title>
     <link rel="stylesheet" href="./css/style.css" />
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI=" crossorigin="" />
 
 
     <script src="https://d3js.org/d3.v5.min.js"></script>
     <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js" integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM=" crossorigin=""></script>
-    <title>ВІЙНА. ПОЧАТОК. МАРІУПОЛЬ</title>
+
 </head>
 
 <body>
@@ -67,14 +95,15 @@
                     Заспокоєні місцевою владою, вони не залишили місто в перші дні. Десятки тисяч змогли виїхати лише після 15 березня. Остаточна кількість загиблих досі невідома, але, ймовірно, йдеться про понад 100 тис. жертв.</div>
             </p>
             <div id='creds'>
-                <p>Цей проєкт — спільна робота редакції ТЕКСТІВ і маріупольського сайту 0629.com. Автори: Антон Сіманчук, <a href="https://texty.org.ua/author/anna-murlykina/">Анна Мурликіна</a>, <a href="https://texty.org.ua/author/denys-hubashov/">Денис Губашов</a>,
-                    <a href="https://texty.org.ua/author/nadja-kelm/">Надя Кельм</a>, <a href="https://texty.org.ua/author/inna-hadzynska/">Інна Гадзинська</a>
+                <p>Цей проєкт — спільна робота редакції ТЕКСТІВ і маріупольського сайту 0629.com. Автори: Антон Сіманчук, <a href="https://texty.org.ua/author/anna-murlykina/" target="_blank">Анна Мурликіна</a>, <a href="https://texty.org.ua/author/denys-hubashov/"
+                        target="_blank">Денис Губашов</a>,
+                    <a href="https://texty.org.ua/author/nadja-kelm/" target="_blank">Надя Кельм</a>, <a href="https://texty.org.ua/author/inna-hadzynska/" target="_blank">Інна Гадзинська</a>
                 </p>
             </div>
-            <div id='stiky-header'>
-                <div id='date-placeholder' class="only-for-black">2022-02-23</div>
-                <div class="only-for-black">
-                    <p id='type-placeholder' class='date-type only-for-black'>ЦИВІЛЬНИЙ ВИМІР</p>
+            <div id='stiky-header' class="only-for-black">
+                <div id='date-placeholder'>2022-02-23</div>
+                <div>
+                    <p id='type-placeholder' class='date-type'>ЦИВІЛЬНИЙ ВИМІР</p>
                 </div>
             </div>
             <div id='main-text-block'></div>
@@ -86,10 +115,45 @@
                     осіб і досі перебувають у російському полоні (за даними на січень 2023 року).
                 </p>
                 <p>Матеріал підготовлено за сприяння Фонду розвитку ЗМІ посольства США. Грантодавець не відповідає за думки та інформацію, викладені у статті.</p>
+
+
+                <div class="donate-us ">
+                    <a class="donate-button " href="https://www.liqpay.ua/api/3/checkout?data=eyJ2ZXJzaW9uIjozLCJhY3Rpb24iOiJwYXlkb25hdGUiLCJwdWJsaWNfa2V5IjoiaTc2NjUwNTYyODI3IiwiYW1vdW50IjoiMTUwIiwiY3VycmVuY3kiOiJVQUgiLCJkZXNjcmlwdGlvbiI6ItCf0L7QttC10YDRgtCy0LAiLCJ0eXBlIjoiZG9uYXRlIiwibGFuZ3VhZ2UiOiJ1ayJ9&amp;signature=tTFrEUyI4WV5l3N7G%2BYg5keUaXU%3D "
+                        target="_blank ">
+                        <p class="donate-p ">Пожертвувати</p>
+                    </a>
+                    <p>TEXTY.ORG.UA — незалежне видання без навʼязливої реклами й замовних матеріалів. Щоб працювати далі, нам потрібна ваша підтримка.
+                        <a href="https://texty.org.ua/support/#subscription ">Також ви можете зробити пожертву
+                        щомісячною.</a>
+                    </p>
+                </div>
+                <section id="created_texty">
+                    <div>
+                        <a href="https://www.facebook.com/sharer/sharer.php?u=https://texty.org.ua/d/2023/saltivka/" class="share-btn " target="_blank"><i class="fa-brands fa-facebook "></i></a>
+                        <a href="https://twitter.com/intent/tweet?text=https://texty.org.ua/d/2023/saltivka/" class="share-btn " target="_blank"><i class="fa-brands fa-twitter "></i></a>
+                        <h3 id='end-text'>Створено Текстами</h3>
+                    </div>
+                    <div>
+                        <a href="http://texty.org.ua/ " target="_blank "><img src="pic/logo.svg " alt="texty.org.ua " id='end-logo'></a>
+                    </div>
+                </section>
             </div>
         </article>
     </div>
-
+    <script type="text/javascript">
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-18136548-1']);
+        _gaq.push(['_trackPageview']);
+        (function() {
+            var ga = document.createElement('script');
+            ga.type = 'text/javascript';
+            ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'stats.g.doubleclick.net/dc.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(ga, s);
+        })();
+    </script>
+    <script src="https://texty.org.ua/static/TopProjectsBannerD.js"></script>
     <script src="./js/map.js"></script>
     <script src="./js/text_generator.js"></script>
     <script src="https://unpkg.com/scrollama"></script>

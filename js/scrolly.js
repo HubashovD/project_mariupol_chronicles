@@ -21,10 +21,9 @@
  }
 
  var ukrpolyStyles = {
-     "color": "#000000",
-     "fillColor": "#000000",
+     "color": "#426357",
+     "fillColor": "#7DBCA5",
      'fillOpacity': 0.6,
-     "stroke": false
  }
 
  var pointStyles = {
@@ -62,13 +61,12 @@
              d3.select('#mask')
                  .transition()
                  .duration(1000)
-                 .style('opacity', '0')
+                 .style('opacity', '1')
                  .style('background-color', '#F6F6F4')
 
              d3.selectAll('.only-for-black')
                  .transition()
                  .duration(1000)
-                 .style('opacity', '1')
                  .style('background', '#F6F6F4')
 
          }
@@ -84,7 +82,6 @@
              d3.selectAll('.only-for-black')
                  .transition()
                  .duration(1000)
-                 .style('opacity', '1')
                  .style('background', 'black')
 
 
@@ -132,23 +129,27 @@
          d3.selectAll('.point')
              .attr('opacity', '0')
 
-         d3.select("#date-placeholder")
-             .transition()
-             .duration(500)
-             .text(response.element.attributes[3].nodeValue)
+         if (response.element.hasAttribute("date")) {
+             d3.select("#date-placeholder")
+                 .transition()
+                 .duration(500)
+                 .text(response.element.attributes.date.nodeValue)
+         }
 
-         if (response.element.attributes[2].nodeValue == 'war') {
-             d3.select('#type-placeholder')
-                 .transition()
-                 .duration(500)
-                 .attr('class', 'date-type war')
-                 .text("ВІЙСЬКОВИЙ ВИМІР")
-         } else {
-             d3.select('#type-placeholder')
-                 .transition()
-                 .duration(500)
-                 .attr('class', 'date-type')
-                 .text("ЦИВІЛЬНИЙ ВИМІР")
+         if (response.element.hasAttribute("data_step")) {
+             if (response.element.attributes.data_step.nodeValue == 'war') {
+                 d3.select('#type-placeholder')
+                     .transition()
+                     .duration(500)
+                     .attr('class', 'date-type war')
+                     .text("ВІЙСЬКОВИЙ ВИМІР")
+             } else {
+                 d3.select('#type-placeholder')
+                     .transition()
+                     .duration(500)
+                     .attr('class', 'date-type')
+                     .text("ЦИВІЛЬНИЙ ВИМІР")
+             }
          }
 
 
@@ -223,8 +224,11 @@
              var map_poly = response.element.attributes.map_poly.nodeValue.split(",")
          } catch { map_poly = [] }
 
-         function polyFilter(feature) {
-             if (map_poly.includes(feature.properties.id_.toString())) return true
+         function polyFilter(feature, layer) {
+             if (map_poly.includes(feature.properties.id_.toString()))
+
+
+                 return true
          }
 
          if (response.element.attributes.map_poly.nodeValue != "") {
@@ -244,12 +248,31 @@
                              TopolayerGroupPoly.removeLayer(layer);
                          });
 
+                         console.log(data)
+                             //  geoData = L.geoJSON(data, { filter: polyFilter }, {
+                             //      style: ukrpolyStyles,
+                             //  })
 
-                         geoData = L.geoJSON(data, { filter: polyFilter }, {
-                             style: ukrpolyStyles,
+                         //  geoData = L.geoJSON(data, {
+                         //      style: ukrpolyStyles,
+                         //  })
+
+                         //  geoData.addTo(TopolayerGroupPoly);
+
+                         L.geoJson(data, {
+                             onEachFeature: function(feature, layer) {
+                                 if (map_poly.includes(feature.properties.id_.toString())) {
+                                     var poly = L.geoJson(feature, { style: ukrpolyStyles })
+                                         //  circle.setStyle({ 'className': 'point' })
+                                     poly.addTo(TopolayerGroupPoly);
+
+                                     //  circle.bindPopup(feature.properties.name, { closeButton: false, autoClose: false }).openPopup()
+                                 } else {}
+
+                             }
                          })
 
-                         geoData.addTo(TopolayerGroupPoly);
+
 
 
 
@@ -358,7 +381,7 @@
              var zoom = response.element.attributes.zoom.nodeValue
 
              if (window.screen.height > window.screen.width) {
-                 zoom = zoom - 1
+                 zoom = zoom - 2
              }
              map.flyTo([lat, lon], zoom);
          } else {

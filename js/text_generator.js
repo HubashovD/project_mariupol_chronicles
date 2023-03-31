@@ -9,7 +9,7 @@ d3.csv("./data/data.csv").then(function(data) {
         block
             .attr("class", "usual-text-block step " + element.type)
             .attr("id", "step-" + element.step)
-            .attr("data-step", element.type)
+            .attr("data_step", element.type)
             .attr("date", element.date)
             .attr("coords", element.coordinates)
             .attr("coords-text", element.coordinates_text)
