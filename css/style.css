@@ -304,7 +304,6 @@
     #main-header {
         height: 100vh;
         width: 100%;
-        margin-left: -1em;
         display: flex;
         /* background-image: url('https://texty.github.io/project_russian_war_structure/pic/cover.png'); */
         /* background-size: cover; */
@@ -361,9 +360,9 @@
         width: 100vw;
         background-color: #F6F6F4;
         z-index: 999;
-        margin-left: -1px;
+        /* margin-left: -1px;
         margin-right: -1px;
-        margin-bottom: -1px;
+        margin-bottom: -1px; */
     }
     
     #date-placeholder {
