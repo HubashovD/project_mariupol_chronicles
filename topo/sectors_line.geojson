@@ -2,8 +2,12 @@
     "type": "FeatureCollection",
     "name": "sectors_line",
     "crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
-    "features": [
-        { "type": "Feature", "properties": { "id": 1, "name": "Сектор С, 36 ОБрМП, ОЗСП \"Азов\", НГУ" }, "geometry": { "type": "MultiLineString", "coordinates": [
+    "features": [{
+            "type": "Feature",
+            "properties": { "id": 1, "name": "Сектор С" },
+            "geometry": {
+                "type": "MultiLineString",
+                "coordinates": [
                     [
                         [37.538745058676732, 47.319801388333062],
                         [37.537820958345321, 47.167680915679732],
@@ -19,8 +23,15 @@
                         [37.635265418295617, 47.117428065093556],
                         [37.774829555666081, 47.16159730113479]
                     ]
-                ] } },
-        { "type": "Feature", "properties": { "id": 1, "name": "Сектор D, 1 батальон ОЗСП \"Азов\", 74 ОРБ" }, "geometry": { "type": "MultiLineString", "coordinates": [
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": { "id": 1, "name": "Сектор D" },
+            "geometry": {
+                "type": "MultiLineString",
+                "coordinates": [
                     [
                         [37.775212188562328, 47.16159730113479],
                         [37.636001742980191, 47.117695583502602],
@@ -33,8 +44,15 @@
                         [37.758269080855811, 47.073383853437484],
                         [37.82342393349046, 47.086877556620891]
                     ]
-                ] } },
-        { "type": "Feature", "properties": { "id": 1, "name": "Сектор А, 2 батальон ОЗСП \"Азов\", 23 ЗМО, 9 ДННК ДПСУ" }, "geometry": { "type": "MultiLineString", "coordinates": [
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": { "id": 1, "name": "Сектор А" },
+            "geometry": {
+                "type": "MultiLineString",
+                "coordinates": [
                     [
                         [37.46145321363322, 47.006573752644272],
                         [37.57624308250972, 47.077237060072854],
@@ -44,9 +62,16 @@
                         [37.419210283733705, 47.082086831899439],
                         [37.410180405535044, 47.081666694032975]
                     ]
-                ] } },
+                ]
+            }
+        },
         { "type": "Feature", "properties": { "id": null, "name": null }, "geometry": { "type": "MultiLineString", "coordinates": [] } },
-        { "type": "Feature", "properties": { "id": 1, "name": "Сектор В, 109 ОБр ТрО, ОЗСП \"Азов\", НГУ, 73 МЦСО" }, "geometry": { "type": "MultiLineString", "coordinates": [
+        {
+            "type": "Feature",
+            "properties": { "id": 1, "name": "Сектор В" },
+            "geometry": {
+                "type": "MultiLineString",
+                "coordinates": [
                     [
                         [37.410180405535044, 47.082187803228663],
                         [37.418448998890362, 47.082014596229683],
@@ -61,7 +86,9 @@
                         [37.537820958345335, 47.167680915679732],
                         [37.539510324469234, 47.319801388333062]
                     ]
-                ] } },
+                ]
+            }
+        },
         { "type": "Feature", "properties": { "id": null, "name": null }, "geometry": { "type": "MultiLineString", "coordinates": [] } }
     ]
 }
