@@ -482,10 +482,24 @@ d3.csv("./data/data.csv").then(function(data) {
                             L.geoJson(data, {
                                 onEachFeature: function(feature, layer) {
                                     if (icons.includes(feature.properties.id.toString())) {
-                                        var greenIcon = L.icon({
-                                            iconUrl: './icons/' + feature.properties.icon,
-                                            iconSize: [38, 95], // size of the icon
-                                        });
+
+                                        if (window.screen.height > window.screen.width) {
+                                            var greenIcon = L.icon({
+                                                iconUrl: './icons/' + feature.properties.icon,
+                                                iconSize: [15, 38], // size of the icon
+                                            });
+                                        } else {
+                                            var greenIcon = L.icon({
+                                                iconUrl: './icons/' + feature.properties.icon,
+                                                iconSize: [38, 95], // size of the icon
+                                            });
+                                        }
+
+
+
+
+
+
                                         L.marker([feature.geometry.coordinates[1], feature.geometry.coordinates[0]], { icon: greenIcon }).addTo(IconlayerGroup);
                                     } else {}
                                 }

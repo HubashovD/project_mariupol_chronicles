@@ -41,6 +41,491 @@
     <script src="https://d3js.org/d3.v5.min.js"></script>
     <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js" integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM=" crossorigin=""></script>
 
+
+    <style>
+        /* HEADER */
+        
+        header {
+            min-height: 2em;
+            width: 100%;
+            background-color: white;
+            display: flex;
+            display: grid;
+            grid-template-columns: [start] 2fr [logo-start] 15fr [rubrics-start] 55fr [rubrics-end] 2fr [end];
+            align-items: center;
+            z-index: 10;
+        }
+        
+        header a {
+            text-decoration: inherit;
+            color: inherit;
+            transition: color .05s ease-in-out;
+        }
+        
+        header ul {
+            margin-top: 0px;
+        }
+        
+        .texty-logo {
+            grid-column-start: logo-start;
+            width: 150px;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        header .texty-logo img {
+            min-width: 150px;
+            max-width: 100%;
+            max-height: 20px;
+            object-fit: contain;
+        }
+        
+        header .rubrics-container {
+            cursor: pointer;
+            grid-column: rubrics-start/rubrics-end;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        header .rubric {
+            text-transform: uppercase;
+            font-size: 16px;
+            font-weight: 400;
+            letter-spacing: 0.5px;
+            margin: 0;
+        }
+        
+        header .rubrics-container .r-burger {
+            grid-column: 7/8;
+        }
+        
+        #menu__toggle {
+            display: none;
+        }
+        
+        .menu__btn {
+            display: flex;
+            align-items: center;
+            position: relative;
+            width: 26px;
+            height: 26px;
+            cursor: pointer;
+            z-index: 20000;
+        }
+        
+        .menu__btn>span::before {
+            content: '';
+            top: -8px;
+        }
+        
+        .menu__btn>span::after {
+            content: '';
+            top: 8px;
+        }
+        
+        .menu__btn>span,
+        .menu__btn>span::before,
+        .menu__btn>span::after {
+            display: block;
+            position: absolute;
+            width: 100%;
+            height: 2px;
+            background-color: #616161;
+            transition-duration: .25s;
+        }
+        
+        .mobile-only {
+            display: none
+        }
+        
+        .menu__box {
+            display: grid;
+            grid-template-columns: [start] 17fr [burger-menu-start] 43fr [burger-menu-end] 14fr [end];
+            width: 100%;
+            max-width: 1400px;
+            position: absolute;
+            visibility: hidden;
+            left: -100%;
+            width: 100%;
+            height: 50px;
+            margin: 0;
+            padding: 0;
+            background-color: white;
+            transition-duration: .25s;
+            z-index: 10000;
+        }
+        
+        .items__container {
+            grid-column: start/end;
+            display: flex;
+            justify-content: space-around;
+            list-style: none;
+        }
+        
+        #menu__toggle:checked~.menu__box {
+            visibility: visible;
+            left: 0;
+        }
+        
+        .menu__item {
+            text-transform: capitalize;
+            display: block;
+            padding: 2px 0;
+            width: max-content;
+            color: #ed6746;
+            font-size: 17px;
+            font-weight: 400;
+            text-align: left;
+            margin: 10px 0;
+            text-decoration: none;
+            transition-duration: .25s;
+        }
+        
+        #root {
+            margin-top: 80px;
+        }
+        
+        @media (max-width: 1000px) {
+            header .rubrics-container .r5,
+            header .rubrics-container .r6,
+            header .rubrics-container .r7 {
+                display: none;
+            }
+        }
+        
+        @media (max-width: 800px) {
+            header {
+                position: fixed;
+                top: 0;
+                height: 50px;
+                background-color: black;
+                grid-template-columns: auto 80px;
+            }
+            header .texty-logo {
+                grid-column: 1/2;
+                justify-content: center;
+                margin-left: 1em;
+            }
+            header .rubrics-container {
+                display: block;
+                grid-column: 2/3;
+                grid-row: 1/2;
+                padding: 0 20px;
+            }
+            header .rubrics-container .r1,
+            header .rubrics-container .r2,
+            header .rubrics-container .r3,
+            header .rubrics-container .r4 {
+                display: none;
+            }
+            .desktop-only {
+                display: none;
+            }
+            .mobile-only {
+                display: block;
+            }
+            .menu__btn>span,
+            .menu__btn>span::before,
+            .menu__btn>span::after {
+                background-color: white;
+            }
+            .items__container {
+                background-color: black;
+                display: block;
+            }
+        }
+        /*  read more section */
+        
+        #read-more-title {
+            grid-column: 1/-1;
+            text-align: center;
+            margin: auto;
+        }
+        
+        #custom-read-more {
+            grid-column: 1/-1;
+            width: 90%;
+            max-width: 1200px;
+            margin: auto;
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        #custom-read-more>.rm {
+            text-decoration: none;
+            color: inherit;
+            width: 25%;
+            min-height: 200px;
+            display: flex;
+            margin: 10px auto;
+            border-bottom: 0;
+        }
+        
+        #custom-read-more>.rm>h2 {
+            width: 80% !important;
+            text-align: center !important;
+            margin: auto !important;
+            font-size: 20px !important;
+            font-weight: normal;
+            color: white;
+        }
+        
+        #rm-1 {
+            background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("https://texty.org.ua/media/images/slidesnetwork26.original.jpg");
+            background-size: cover;
+        }
+        
+        #rm-2 {
+            background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5));
+            background-size: cover;
+        }
+        
+        #rm-3 {
+            background: linear-gradient( rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)), url("https://texty.org.ua/media/images/cover_f2iO7z7.original.png");
+            background-size: cover;
+        }
+        
+        @media(max-width: 812px) {
+            #custom-read-more {
+                display: block !important;
+            }
+            #custom-read-more>.rm {
+                width: 90%;
+            }
+        }
+        /*  Subscribe-footer */
+        
+        .subscribe-footer {
+            width: 100%;
+            margin: 50px auto;
+            display: grid;
+            min-height: 100px;
+            height: max-content;
+            background-color: black;
+            color: white;
+            grid-template-columns: [start] 2fr [subscribe-call-start] 15fr [subscribe-call-end] 3fr [mail-container-start] 17fr [mail-container-end button-start] 18fr [button-end] 3fr [last-release-start] 14fr [last-release-end] 2fr [end];
+            align-items: center;
+        }
+        
+        .subscribe-footer a {
+            color: inherit;
+        }
+        
+        @media (max-width: 800px) {
+            .subscribe-footer {
+                background-color: unset;
+                color: unset;
+                display: flex;
+                flex-direction: column;
+                margin: 50px auto;
+                width: 80%;
+                max-width: 40em;
+            }
+        }
+        
+        .subscribe-footer .subscribe-call {
+            grid-column: subscribe-call-start / subscribe-call-end;
+            margin: 1em 0;
+        }
+        
+        .subscribe-footer .mail-input-container {
+            display: flex;
+            grid-column: mail-container-start / mail-container-end;
+            height: 40px;
+            border: 2px solid grey;
+            border-right-style: none;
+            box-sizing: border-box;
+        }
+        
+        .subscribe-footer .subscribe-button {
+            grid-column: button-start / button-end;
+            height: 40px;
+            font-size: 20px;
+            letter-spacing: 1px;
+            cursor: pointer;
+            min-height: 30px;
+            border: 0;
+            font-weight: bold;
+            background-color: white;
+            color: black;
+        }
+        
+        .subscribe-footer .mail-input-container i.icon-envelope {
+            margin: auto 10px;
+            width: 30px;
+            height: 30px;
+            background-repeat: no-repeat;
+            background: url('data:image/svg+xml;utf8,<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" fill="white" width="30px" height="30px" viewBox="0 0 511.626 511.626" style="enable-background:new 0 0 511.626 511.626;" xml:space="preserve"><g><g><path d="M49.106,178.729c6.472,4.567,25.981,18.131,58.528,40.685c32.548,22.554,57.482,39.92,74.803,52.099 c1.903,1.335,5.946,4.237,12.131,8.71c6.186,4.476,11.326,8.093,15.416,10.852c4.093,2.758,9.041,5.852,14.849,9.277 c5.806,3.422,11.279,5.996,16.418,7.7c5.14,1.718,9.898,2.569,14.275,2.569h0.287h0.288c4.377,0,9.137-0.852,14.277-2.569 c5.137-1.704,10.615-4.281,16.416-7.7c5.804-3.429,10.752-6.52,14.845-9.277c4.093-2.759,9.229-6.376,15.417-10.852 c6.184-4.477,10.232-7.375,12.135-8.71c17.508-12.179,62.051-43.11,133.615-92.79c13.894-9.703,25.502-21.411,34.827-35.116 c9.332-13.699,13.993-28.07,13.993-43.105c0-12.564-4.523-23.319-13.565-32.264c-9.041-8.947-19.749-13.418-32.117-13.418H45.679 c-14.655,0-25.933,4.948-33.832,14.844C3.949,79.562,0,91.934,0,106.779c0,11.991,5.236,24.985,15.703,38.974 C26.169,159.743,37.307,170.736,49.106,178.729z"/><path d="M483.072,209.275c-62.424,42.251-109.824,75.087-142.177,98.501c-10.849,7.991-19.65,14.229-26.409,18.699 c-6.759,4.473-15.748,9.041-26.98,13.702c-11.228,4.668-21.692,6.995-31.401,6.995h-0.291h-0.287 c-9.707,0-20.177-2.327-31.405-6.995c-11.228-4.661-20.223-9.229-26.98-13.702c-6.755-4.47-15.559-10.708-26.407-18.699 c-25.697-18.842-72.995-51.68-141.896-98.501C17.987,202.047,8.375,193.762,0,184.437v226.685c0,12.57,4.471,23.319,13.418,32.265 c8.945,8.949,19.701,13.422,32.264,13.422h420.266c12.56,0,23.315-4.473,32.261-13.422c8.949-8.949,13.418-19.694,13.418-32.265 V184.437C503.441,193.569,493.927,201.854,483.072,209.275z"/></g></g></svg>');
+        }
+        
+        .subscribe-footer .last-release {
+            grid-column: last-release-start/last-release-end;
+        }
+        
+        .subscribe-footer .mail-input-container input {
+            border: 0;
+            min-height: 30px;
+            width: calc(100% - 50px);
+            font-size: 17px;
+            letter-spacing: 1px;
+            background-color: black;
+            color: grey;
+            box-sizing: border-box;
+        }
+        
+        @media (max-width: 800px) {
+            .subscribe-footer .mail-input-container {
+                width: 100%;
+                border: 1px solid grey;
+            }
+            .subscribe-footer .mail-input-container input {
+                background-color: unset;
+                border: 0;
+                min-height: 30px;
+                width: 100%;
+            }
+            .subscribe-footer .subscribe-button {
+                cursor: pointer;
+                min-height: 38px;
+                border: 0;
+                font-weight: bold;
+                color: white;
+                background-color: black;
+                width: 100%;
+            }
+            .subscribe-footer .mail-input-container i.icon-envelope {
+                margin: auto 10px;
+                width: 40px;
+                height: 30px;
+                background-repeat: no-repeat;
+                background-image: url('data:image/svg+xml;utf8,<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" fill="black" width="30px" height="30px" viewBox="0 0 511.626 511.626" style="enable-background:new 0 0 511.626 511.626;" xml:space="preserve"><g><g><path d="M49.106,178.729c6.472,4.567,25.981,18.131,58.528,40.685c32.548,22.554,57.482,39.92,74.803,52.099 c1.903,1.335,5.946,4.237,12.131,8.71c6.186,4.476,11.326,8.093,15.416,10.852c4.093,2.758,9.041,5.852,14.849,9.277 c5.806,3.422,11.279,5.996,16.418,7.7c5.14,1.718,9.898,2.569,14.275,2.569h0.287h0.288c4.377,0,9.137-0.852,14.277-2.569 c5.137-1.704,10.615-4.281,16.416-7.7c5.804-3.429,10.752-6.52,14.845-9.277c4.093-2.759,9.229-6.376,15.417-10.852 c6.184-4.477,10.232-7.375,12.135-8.71c17.508-12.179,62.051-43.11,133.615-92.79c13.894-9.703,25.502-21.411,34.827-35.116 c9.332-13.699,13.993-28.07,13.993-43.105c0-12.564-4.523-23.319-13.565-32.264c-9.041-8.947-19.749-13.418-32.117-13.418H45.679 c-14.655,0-25.933,4.948-33.832,14.844C3.949,79.562,0,91.934,0,106.779c0,11.991,5.236,24.985,15.703,38.974 C26.169,159.743,37.307,170.736,49.106,178.729z"/><path d="M483.072,209.275c-62.424,42.251-109.824,75.087-142.177,98.501c-10.849,7.991-19.65,14.229-26.409,18.699 c-6.759,4.473-15.748,9.041-26.98,13.702c-11.228,4.668-21.692,6.995-31.401,6.995h-0.291h-0.287 c-9.707,0-20.177-2.327-31.405-6.995c-11.228-4.661-20.223-9.229-26.98-13.702c-6.755-4.47-15.559-10.708-26.407-18.699 c-25.697-18.842-72.995-51.68-141.896-98.501C17.987,202.047,8.375,193.762,0,184.437v226.685c0,12.57,4.471,23.319,13.418,32.265 c8.945,8.949,19.701,13.422,32.264,13.422h420.266c12.56,0,23.315-4.473,32.261-13.422c8.949-8.949,13.418-19.694,13.418-32.265 V184.437C503.441,193.569,493.927,201.854,483.072,209.275z"/></g></g></svg>');
+            }
+        }
+        /* FOOTER */
+        
+        footer {
+            padding-bottom: 50px;
+            display: grid;
+            grid-template-columns: [start] 2fr [logo-start] 13fr [logo-end] 5fr [guide-start] 35fr [guide-end] 5fr [sb-start] 13fr [sb-end] 1fr [end];
+            z-index: 999;
+            position: relative;
+        }
+        
+        #social_buttons {
+            grid-column: sb-start/sb-end;
+        }
+        
+        .follow-us .follow-us-tiles {
+            display: flex;
+            flex-wrap: wrap;
+        }
+        
+        #social_buttons img {
+            width: 30px;
+            margin-right: 10px;
+        }
+        
+        .follow-us .follow-us-tiles a .bottom-caption {
+            position: absolute;
+            font-size: 0.7rem;
+            padding-left: 2px;
+            color: #50abf1;
+            margin-top: -5px;
+        }
+        
+        .follow-us p {
+            margin-top: 0;
+        }
+        
+        #logo-copyright {
+            grid-column: logo-start/logo-end;
+        }
+        
+        #guide-block {
+            grid-column: guide-start/guide-end;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            justify-content: space-between;
+        }
+        
+        #guide-block ul {
+            list-style-type: none;
+            margin-top: 0;
+            margin-bottom: 30px;
+        }
+        
+        @media (max-width: 1050px) {
+            #guide-block {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        #license {
+            grid-column: logo-start/guide-start;
+            margin-top: 1em;
+        }
+        
+        #license p {
+            font-size: 12px;
+            max-width: 30em;
+        }
+        
+        footer a {
+            text-decoration: inherit;
+            color: inherit;
+            transition: color .05s ease-in-out;
+        }
+        
+        @media(max-width: 800px) {
+            footer {
+                background-color: black;
+                color: white;
+                padding: 30px 1em;
+                display: block;
+                margin-top: -2px;
+            }
+            #guide-block {
+                display: block;
+            }
+        }
+        
+        .share-article {
+            grid-column: text-start/text-end;
+            margin: 20px auto;
+            display: flex;
+            align-items: center;
+            display: grid;
+            width: 250px;
+            min-width: max-content;
+            grid-template-columns: repeat(4, 1fr);
+        }
+        
+        .share-article .share-title {
+            grid-row: 1;
+            text-align: center;
+            width: 100%;
+            grid-column: 1/-1;
+        }
+        
+        .share-article .sb {
+            grid-row: 2;
+            cursor: pointer;
+            height: max-content;
+            margin: 10px 0;
+            width: 100%;
+            display: flex;
+            border-right: 1px solid black;
+        }
+        
+        .share-article .sb a {
+            margin: 0 auto 0 auto;
+        }
+    </style>
+
+
+
+
 </head>
 
 <body>
@@ -50,7 +535,54 @@
         <div class='static-block'>
             <div id='test-text'></div>
         </div>
-        <div id='menu-wrapper'>
+
+
+        <header>
+            <a class="texty-logo" href="/">
+                <img class="desktop-only" src="https://texty.org.ua/static/core/images/logo_texty_black.svg" alt="Тексти.org.ua">
+                <img class="mobile-only" src="https://texty.org.ua/static/core/images/white_logo.svg" alt="Тексти.org.ua">
+            </a>
+
+            <nav class="rubrics-container">
+                <div class="rubric r1"><a href="https://texty.org.ua/tag/khid-vijny/" class="special-devil-animation"><span>Хід Війни</span></a></div>
+                <div class="rubric r2"><a href="https://texty.org.ua/tag/dezinformatsija/"><span>#Інфовійна</span></a></div>
+                <div class="rubric r2"><a href="https://texty.org.ua/tag/eng/"><span>#English</span></a></div>
+                <div class="rubric r5"><a href="https://texty.org.ua/articles/"><span>Статті</span></a></div>
+                <div class="rubric r6"><a href="https://texty.org.ua/fragments/"><span>Фрагменти</span></a></div>
+                <div class="rubric r7"><a href="https://texty.org.ua/selected/"><span>Вибір редакції</span></a></div>
+
+                <div class="rubric r-burger">
+                    <input id="menu__toggle" type="checkbox">
+                    <label class="menu__btn" for="menu__toggle">
+                <span></span>
+                </label>
+
+                    <div class="menu__box">
+                        <ul class="items__container">
+                            <li class="mobile-only"><a class="menu__item" href="https://texty.org.ua/tag/khid-vijny/">Хід Війни</a></li>
+                            <li class="mobile-only"><a class="menu__item" href="https://texty.org.ua/tag/dezinformatsija/">#Інфовійна</a></li>
+                            <li class="mobile-only"><a class="menu__item" href="https://texty.org.ua/tag/eng/">#English</a></li>
+
+                            <li><a class="menu__item" href="https://texty.org.ua/projects/">Журналістика даних</a></li>
+                            <li><a class="menu__item" href="https://texty.org.ua/articles/">Статті</a></li>
+                            <li><a class="menu__item" href="https://texty.org.ua/fragments/">Фрагменти</a></li>
+                            <li><a class="menu__item" href="https://texty.org.ua/selected/">Вибір редакції</a></li>
+                            <li><a class="menu__item" href="https://texty.org.ua/donate/#/">Наш Дата-Арт</a></li>
+                            <li><a class="menu__item" href="https://texty.org.ua/texty.org.ua/d/principles/">Принципи</a></li>
+                            <li><a class="menu__item" href="https://texty.org.ua/tag/hrafik-dnja/">Графік дня</a></li>
+                        </ul>
+                    </div>
+
+                </div>
+                <div id="search" class="rubric"></div>
+            </nav>
+        </header>
+
+
+
+
+
+        <!-- <div id='menu-wrapper'>
             <a href="https://texty.org.ua/"><img src="./pic/logo_texty_black.svg" id="main-logo"></a>
             <nav class="rubrics-container">
                 <div class="rubric r1"><a href="https://texty.org.ua/tag/khid-vijny/" target="_blank"><span><b></b>ХІД ВІЙНИ</span></a>
@@ -65,19 +597,20 @@
         <div class="header-wrapper"></div>
 
         <div id="socio-icons">
-            <!--fb-->
             <a href="https://www.facebook.com/sharer/sharer.php?u=https://texty.org.ua/d/2023/saltivka/" target="_blank" class="share-btn">
                 <div class="icon-wrapper">
                     <img id="fb" src="pic/facebook_black.png" width="48px">
                 </div>
             </a>
-            <!--tw -->
             <a href="https://twitter.com/intent/tweet?text=https://texty.org.ua/d/2023/saltivka/" target="_blank" class="share-btn">
                 <div class="icon-wrapper">
                     <img id="tw" src="pic/twitter_black.png" width="48px">
                 </div>
             </a>
-        </div>
+        </div> -->
+
+
+
         <div id="main-header">
             <div class='title-wrapper'>
                 <h1 class='title'> Війна. Початок. Маріуполь
@@ -117,7 +650,7 @@
                 <p>Матеріал підготовлено за сприяння Фонду розвитку ЗМІ посольства США. Грантодавець не відповідає за думки та інформацію, викладені у статті.</p>
 
 
-                <div class="donate-us ">
+                <!-- <div class="donate-us ">
                     <a class="donate-button " href="https://www.liqpay.ua/api/3/checkout?data=eyJ2ZXJzaW9uIjozLCJhY3Rpb24iOiJwYXlkb25hdGUiLCJwdWJsaWNfa2V5IjoiaTc2NjUwNTYyODI3IiwiYW1vdW50IjoiMTUwIiwiY3VycmVuY3kiOiJVQUgiLCJkZXNjcmlwdGlvbiI6ItCf0L7QttC10YDRgtCy0LAiLCJ0eXBlIjoiZG9uYXRlIiwibGFuZ3VhZ2UiOiJ1ayJ9&amp;signature=tTFrEUyI4WV5l3N7G%2BYg5keUaXU%3D "
                         target="_blank ">
                         <p class="donate-p ">Пожертвувати</p>
@@ -136,8 +669,103 @@
                     <div>
                         <a href="http://texty.org.ua/ " target="_blank "><img src="pic/logo.svg " alt="texty.org.ua " id='end-logo'></a>
                     </div>
-                </section>
+                </section> -->
             </div>
+
+            <footer>
+                <div id="logo-copyright">
+                    <a class="texty-logo" href="/">
+                        <img class="desktop-only" src="https://texty.org.ua/static/core/images/white_logo.svg" alt="Тексти.org.ua">
+                        <img class="mobile-only" style="max-width: 150px;" src="https://texty.org.ua/static/core/images/white_logo.svg" alt="Тексти.org.ua">
+
+                    </a>
+                    <div class="copyright">
+                        <p><span class="copyleft">©</span> 2010—2022 Texty.org.ua</p>
+                    </div>
+                </div>
+
+                <div id="guide-block">
+                    <ul class="links1">
+                        <li>
+                            <a href="https://texty.org.ua/p/about/">Про нас</a>
+                            <a href="https://texty.org.ua/p/about-en/">(About us)</a>
+                        </li>
+
+                        <li>
+                            <a href="https://texty.org.ua/articles/">Статті</a>
+                            <a href="https://texty.org.ua/articles/feed.xml">(RSS)</a>
+                        </li>
+
+                        <li>
+                            <a href="https://texty.org.ua/fragments/">Фрагменти</a>
+                            <a href="https://texty.org.ua/fragments/feed.xml">(RSS)</a>
+                        </li>
+
+
+                        <li><a href="https://texty.org.ua/p/mailing-lists/">Розсилки Текстів</a></li>
+                        <li><a href="https://texty.org.ua/selected/">Вибір редакції</a></li>
+                        <li><a href="https://texty.org.ua/tag/eng/">#English</a></li>
+                    </ul>
+
+                    <ul class="links2">
+                        <li><a href="https://texty.org.ua/projects/">Журналістика даних</a></li>
+                        <li><a href="https://texty.org.ua/d/socio/">Фальшиві соціологи</a></li>
+                        <li><a href="https://fgz.texty.org/">Фейкогриз</a></li>
+                        <li><a href="https://texty.org.ua/tag/dezinformatsija/">Дезінформація</a></li>
+                        <li><a href="https://texty.org.ua/tag/disinfomonitor/">Disinfomonitor</a></li>
+                    </ul>
+
+                    <ul class="links3">
+                        <li><a href="https://texty.org.ua/support/" target="_blank">Підтримай нас!</a></li>
+                        <li><a href="https://texty.org.ua/donate/#/" target="_blank">Наш дата-арт</a></li>
+                        <li><a href="https://texty.org.ua/tag/hrafik-dnja/">Графік Дня</a></li>
+                        <li><a href="https://texty.org.ua/archive-blogs/">Архів блогів</a></li>
+                        <li><a href="https://texty.org.ua/archive-books/">Архів книг</a></li>
+                    </ul>
+                </div>
+
+
+                <div id="social_buttons">
+
+
+                    <aside class="follow-us floating-right-autoplace">
+                        <p class="piece-title">Стежити:</p>
+                        <div class="follow-us-tiles">
+                            <a href="https://www.facebook.com/TEXTY.org.ua/" target="_blank">
+                                <img src="https://texty.org.ua/static/core/images/facebook.png" alt="Тексти.org.ua - Facebook">
+                            </a>
+                            <a href="https://www.instagram.com/texty.org.ua/" target="_blank">
+                                <img src="https://texty.org.ua/static/core/images/instagram.png" alt="Тексти.org.ua - Instagram">
+                            </a>
+
+                            <a href="https://telegram.me/textyorgua" target="_blank">
+                                <img src="https://texty.org.ua/static/core/images/telegram.png" alt="Тексти.org.ua - Telegram">
+                            </a>
+
+                            <a href="https://twitter.com/textyorgua" target="_blank">
+                                <img src="https://texty.org.ua/static/core/images/twitter.png" alt="Тексти.org.ua - Twitter">
+                                <div class="bottom-caption">UA</div>
+                            </a>
+
+                            <a href="https://twitter.com/textyorgua_eng" target="_blank">
+                                <img src="https://texty.org.ua/static/core/images/twitter.png" alt="Texty.org.ua - Twitter in English">
+                                <div class="bottom-caption">EN</div>
+                            </a>
+
+                            <a href="https://invite.viber.com/?g2=AQB%2FXntNTr9qKU788eLrk2Pf0b6l6nENMg%2BfjGAND9XZpEdGLM88SHbJcZBVh2Q5" target="_blank">
+                                <img src="https://texty.org.ua/static/core/images/viber.png" alt="Тексти.org.ua - Viber">
+                            </a>
+                        </div>
+                    </aside>
+                </div>
+
+                <div id="license">
+                    <p>Матеріали ТЕКСТИ.org.ua можна використовувати згідно ліцензії <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank">Creative Commons із зазначенням авторства, CC BY</a> (переклад ліцензії <a href="https://creativecommons.org/licenses/by/4.0/legalcode.uk"
+                            target="_blank">українською</a>). Велике прохання ставити гіперпосилання в першому чи другому абзаці вашого матеріалу.</p>
+                    <p></p>
+                </div>
+
+            </footer>
         </article>
     </div>
     <script type="text/javascript">

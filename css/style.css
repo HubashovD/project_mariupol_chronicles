@@ -36,6 +36,11 @@
             align-items: center !important;
             margin-left: 5vw !important;
         }
+        #footer {
+            width: 100vw;
+            padding-left: 5vw;
+            padding-right: 5vw;
+        }
     }
     
     @media (min-width: 480px) and (max-width: 1023px) {
@@ -134,6 +139,7 @@
     /* Hide scrollbar for IE, Edge and Firefox */
     
     body {
+        background-color: #F6F6F4;
         -ms-overflow-style: none;
         /* IE and Edge */
         scrollbar-width: none;
@@ -337,7 +343,7 @@
     
     #lead {
         font-family: 'proxima';
-        font-size: calc(12px + 0.9vw);
+        font-size: calc(16px + 0.5vw);
         width: 70vw;
         position: relative;
         margin-left: 15vw;
@@ -521,8 +527,7 @@
         color: #F6F6F4;
         position: relative;
         padding: auto;
-        width: 100vw;
-        margin-bottom: 5vh;
+        margin-bottom: 20vh;
         height: auto !important;
     }
     
