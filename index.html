@@ -38,6 +38,7 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI=" crossorigin="" />
 
 
+
     <script src="https://d3js.org/d3.v5.min.js"></script>
     <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js" integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM=" crossorigin=""></script>
 
@@ -241,6 +242,8 @@
             grid-column: 1/-1;
             text-align: center;
             margin: auto;
+            position: relative;
+            color: white;
         }
         
         #custom-read-more {
@@ -250,6 +253,7 @@
             margin: auto;
             display: flex;
             justify-content: space-between;
+            position: relative;
         }
         
         #custom-read-more>.rm {
@@ -410,6 +414,8 @@
             grid-template-columns: [start] 2fr [logo-start] 13fr [logo-end] 5fr [guide-start] 35fr [guide-end] 5fr [sb-start] 13fr [sb-end] 1fr [end];
             z-index: 999;
             position: relative;
+            color: white;
+            background-color: black;
         }
         
         #social_buttons {
@@ -499,6 +505,8 @@
             width: 250px;
             min-width: max-content;
             grid-template-columns: repeat(4, 1fr);
+            color: white;
+            position: relative;
         }
         
         .share-article .share-title {
@@ -515,7 +523,7 @@
             margin: 10px 0;
             width: 100%;
             display: flex;
-            border-right: 1px solid black;
+            border-right: 1px solid white;
         }
         
         .share-article .sb a {
@@ -648,29 +656,67 @@
                     осіб і досі перебувають у російському полоні (за даними на січень 2023 року).
                 </p>
                 <p>Матеріал підготовлено за сприяння Фонду розвитку ЗМІ посольства США. Грантодавець не відповідає за думки та інформацію, викладені у статті.</p>
-
-
-                <!-- <div class="donate-us ">
-                    <a class="donate-button " href="https://www.liqpay.ua/api/3/checkout?data=eyJ2ZXJzaW9uIjozLCJhY3Rpb24iOiJwYXlkb25hdGUiLCJwdWJsaWNfa2V5IjoiaTc2NjUwNTYyODI3IiwiYW1vdW50IjoiMTUwIiwiY3VycmVuY3kiOiJVQUgiLCJkZXNjcmlwdGlvbiI6ItCf0L7QttC10YDRgtCy0LAiLCJ0eXBlIjoiZG9uYXRlIiwibGFuZ3VhZ2UiOiJ1ayJ9&amp;signature=tTFrEUyI4WV5l3N7G%2BYg5keUaXU%3D "
-                        target="_blank ">
-                        <p class="donate-p ">Пожертвувати</p>
-                    </a>
-                    <p>TEXTY.ORG.UA — незалежне видання без навʼязливої реклами й замовних матеріалів. Щоб працювати далі, нам потрібна ваша підтримка.
-                        <a href="https://texty.org.ua/support/#subscription ">Також ви можете зробити пожертву
-                        щомісячною.</a>
-                    </p>
-                </div>
-                <section id="created_texty">
-                    <div>
-                        <a href="https://www.facebook.com/sharer/sharer.php?u=https://texty.org.ua/d/2023/saltivka/" class="share-btn " target="_blank"><i class="fa-brands fa-facebook" style="color: #ffffff;"></i></a>
-                        <a href="https://twitter.com/intent/tweet?text=https://texty.org.ua/d/2023/saltivka/" class="share-btn " target="_blank"><i class="fa-brands fa-twitter" style="color: #ffffff;"></i></a>
-                        <h3 id='end-text'>Створено Текстами</h3>
-                    </div>
-                    <div>
-                        <a href="http://texty.org.ua/ " target="_blank "><img src="pic/logo.svg " alt="texty.org.ua " id='end-logo'></a>
-                    </div>
-                </section> -->
             </div>
+
+            <div class="share-article">
+
+                <div class="share-title">Поширити:</div>
+
+                <div class="sb fb">
+                    <a class="share-btn" href="https://www.facebook.com/sharer/sharer.php?u=https://texty.org.ua/d/2023/mariupol_chronicles/" target="_blank">
+                        <img src="./pic/facebook-logo-white.png" alt="Тексти.org.ua - Facebook"></a>
+                </div>
+
+                <div class="sb tw">
+                    <a class="share-btn" href="https://twitter.com/intent/tweet?text=https://texty.org.ua/d/2023/mariupol_chronicles/" target="_blank">
+                        <img src="./pic/twitter-logo-white.png" alt="Тексти.org.ua - Twitter"></a>
+                </div>
+
+                <div class="sb tl">
+                    <a class="share-btn" href="https://telegram.me/share/url?url=https://texty.org.ua/d/2023/mariupol_chronicles/" target="_blank">
+                        <img src="./pic/telegram-logo-white.png" alt="Тексти.org.ua - Telegram"></a>
+                </div>
+
+                <div class="sb hr">
+                    <a href="https://texty.org.ua/support/" target="_blank" title="Пожертвувати"><img src="https://texty.org.ua/static/core/images/hrn2.svg" alt="Знак гривні"></a>
+                </div>
+            </div>
+
+            <h3 id="read-more-title">Читайте також:</h3>
+            <div id="custom-read-more">
+
+                <a id="rm-1" class="rm" href="https://texty.org.ua/projects/108016/telehram-okupaciya-yak-rosiya-vybudovuvala-mediamerezhu-vyjshlo-potomkinske-selo/" target="_blank">
+                    <h2>Телеграм-окупація. Як Росія вибудовувала телеграм-мережу на окупованих територіях</h2>
+                </a>
+                <a id="rm-2" class="rm" href="https://aleph.texty.org.ua" target="_blank">
+                    <h2>Пошук по злитих листуваннях російських чиновників</h2>
+                </a>
+                <a id="rm-3" class="rm" href="https://texty.org.ua/projects/108282/bakteriyi-russkoho-myra-hto-pidtrymuye-rosiyu-v-yevropi/?src=main/" target="_blank">
+                    <h2>Бактерії "русского мира". Хто підримує Росію в Європі</h2>
+                </a>
+            </div>
+
+
+            <form class="subscribe subscribe-footer" action="//texty.us2.list-manage.com/subscribe/post?u=6a4d05e311e165b44ca8ccb21&amp;id=cc81c0bd84" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" target="_blank" novalidate="">
+
+                <div class="subscribe-call">
+                    <p>Отримуйте найкращі статті на e-mail (раз на два тижні)</p>
+                </div>
+
+                <div class="mail-input-container">
+                    <i class="icon-envelope"></i>
+                    <input placeholder="E-mail" type="email" value="" name="EMAIL" required="">
+
+                    <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_6a4d05e311e165b44ca8ccb21_cc81c0bd84" tabindex="-1" value=""></div>
+                </div>
+
+                <button type="submit" value="Додайте мене у список!" name="subscribe" class="subscribe-button">Підписатися</button>
+
+
+                <div class="last-release">
+                    <p><a target="_blank" href="https://mailchi.mp/c92cacc5dab9/texty_newsletter_0412">Подивитись свіжий випуск</a></p>
+                </div>
+            </form>
 
             <footer>
                 <div id="logo-copyright">

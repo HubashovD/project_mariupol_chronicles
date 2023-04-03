@@ -23,11 +23,18 @@ d3.csv("./data/data.csv").then(function(data) {
             .attr('mobile_focus_point', element.mobile_focus_point)
             .attr('mobile_zoom', element.mobile_zoom)
 
+        if (element.map_poly == "" && element.map_points == "" && element.idToShow == "" && element.icons == "") {
+            block
+                .attr("class", "usual-text-block step short-step " + element.type)
+        } else {
+            block
+                .attr("class", "usual-text-block step long-step " + element.type)
+        }
+
         d3.select("#step-" + element.step)
             .append('div')
             .attr("class", "step-grid")
             .attr("id", "grid-step-" + element.step)
-
 
 
         d3.select("#grid-step-" + element.step)
@@ -174,6 +181,16 @@ d3.csv("./data/data.csv").then(function(data) {
 
 
 
+
+            }
+
+
+            if (response.index != 84 && response.index != 85) {
+                d3.select('#mask')
+                    .style('background-color', '#F6F6F4')
+
+                d3.selectAll('.only-for-black')
+                    .style('background', '#F6F6F4')
 
             }
 
@@ -409,7 +426,6 @@ d3.csv("./data/data.csv").then(function(data) {
                         });
                 } catch {}
             }
-
 
 
             // points filter

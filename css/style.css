@@ -145,8 +145,7 @@
         /* Firefox */
         margin: 0;
     }
-    
-    a:link {
+    /* a:link {
         color: #7DBCA5;
         background-color: transparent;
         text-decoration: none;
@@ -168,7 +167,7 @@
         color: #426357;
         background-color: transparent;
         text-decoration: underline;
-    }
+    } */
     
     #main {
         height: 1500px;
@@ -323,7 +322,7 @@
     
     h1.title {
         color: black;
-        font-family: "proxima-bold";
+        font-family: "proxima-bold", sans-serif;
         font-size: calc(50px + 1.5vw);
         font-weight: 800;
         letter-spacing: 5px;
@@ -333,7 +332,7 @@
     }
     
     .title-wrapper h3 {
-        font-family: 'proxima-bold';
+        font-family: 'proxima-bold', sans-serif;
         color: black;
         text-transform: none;
         text-align: center;
@@ -341,7 +340,7 @@
     }
     
     #lead {
-        font-family: 'proxima';
+        font-family: 'proxima', sans-serif;
         font-size: calc(16px + 0.5vw);
         width: 70vw;
         position: relative;
@@ -493,9 +492,16 @@
         /* height: 100vh; */
         font-family: 'proxima';
         font-size: calc(16px + 0.5vw);
-        margin-bottom: 100vh;
         width: 50vw;
         margin-left: 25vw;
+    }
+    
+    .short-step {
+        margin-bottom: 50vh;
+    }
+    
+    .long-step {
+        margin-bottom: 100vh;
     }
     
     .inner-grid-step-mask {
@@ -528,6 +534,7 @@
         padding: auto;
         margin-bottom: 30vh;
         height: auto !important;
+        font-family: 'proxima', 'sans-serif';
     }
     
     #footer div {
@@ -541,7 +548,7 @@
     }
     
     #created_texty {
-        font-family: 'Noto Sans', sans-serif;
+        font-family: 'proxima', 'sans-serif';
         color: #ffffff;
         line-height: 1.6;
         letter-spacing: 1px;
