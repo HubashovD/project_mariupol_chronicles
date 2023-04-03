@@ -29,21 +29,20 @@
     }
     
     @media (max-width: 479px) {
-        #main-logo {
+        /* #main-logo {
             width: 50% !important;
         }
         .donate-us p {
             align-items: center !important;
             margin-left: 5vw !important;
-        }
+        } */
         #footer {
             width: 100vw;
             padding-left: 5vw;
             padding-right: 5vw;
         }
     }
-    
-    @media (min-width: 480px) and (max-width: 1023px) {
+    /* @media (min-width: 480px) and (max-width: 1023px) {
         .rubrics-container {
             display: none !important;
         }
@@ -63,7 +62,7 @@
             align-items: center !important;
             width: 80% !important;
         }
-    }
+    } */
     
     @media (max-width: 1023px) {
         #main-logo {
@@ -448,10 +447,10 @@
         height: 100vh;
         margin-top: 5vh;
         position: fixed;
-        top: -1px;
+        /* top: -1px;
         margin-left: -1px;
         margin-right: -1px;
-        margin-bottom: -1px;
+        margin-bottom: -1px; */
     }
     
     .leaflet-popup-content-wrapper {
@@ -521,13 +520,13 @@
     
     #footer {
         justify-content: space-between;
-        /* width: 100vw; */
+        width: 90vw;
         /* height: 60vh; */
         /* background-color: black; */
         color: #F6F6F4;
         position: relative;
         padding: auto;
-        margin-bottom: 20vh;
+        margin-bottom: 30vh;
         height: auto !important;
     }
     

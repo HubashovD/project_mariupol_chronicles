@@ -20,6 +20,8 @@ d3.csv("./data/data.csv").then(function(data) {
             .attr('focus_point', element.focus_point)
             .attr('idToShow', element.idToShow)
             .attr('icons', element.icons)
+            .attr('mobile_focus_point', element.mobile_focus_point)
+            .attr('mobile_zoom', element.mobile_zoom)
 
         d3.select("#step-" + element.step)
             .append('div')
@@ -456,9 +458,12 @@ d3.csv("./data/data.csv").then(function(data) {
                 var lon = response.element.attributes.focus_point.nodeValue.split(",")[1]
                 var zoom = response.element.attributes.zoom.nodeValue
 
-                if (window.screen.height > window.screen.width) {
-                    zoom = zoom - 2
+                if (window.screen.height > window.screen.width && response.element.attributes.mobile_zoom != '') {
+                    var lat = response.element.attributes.mobile_focus_point.nodeValue.split(",")[0]
+                    var lon = response.element.attributes.mobile_focus_point.nodeValue.split(",")[1]
+                    var zoom = response.element.attributes.mobile_zoom.nodeValue
                 }
+
                 map.flyTo([lat, lon], zoom);
             } else {
                 map.flyTo([47.11, 37.57], 12);
