@@ -37,7 +37,7 @@
             margin-left: 5vw !important;
         } */
         #footer {
-            width: 90vw;
+            width: 90vw !important;
             padding-left: 5vw;
             padding-right: 5vw;
         }
