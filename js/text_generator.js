@@ -49,7 +49,7 @@ d3.csv("./data/data.csv").then(function(data) {
 
         d3.select("#inner-grid-step-" + element.step)
             .append('p')
-            .text(element.text)
+            .html(element.text)
 
 
 
@@ -97,7 +97,7 @@ d3.csv("./data/data.csv").then(function(data) {
         "color": "#000000",
         "fillColor": "#000000",
         'fillOpacity': 0.6,
-        "stroke": false
+        "stroke": false,
     }
 
     var LineStyles = {
@@ -109,6 +109,7 @@ d3.csv("./data/data.csv").then(function(data) {
         "color": "#426357",
         "fillColor": "#7DBCA5",
         'fillOpacity': 0.6,
+        "weight": 1,
     }
 
     var pointStyles = {
@@ -256,6 +257,7 @@ d3.csv("./data/data.csv").then(function(data) {
                     fillColor: "#7DBCA5",
                     fillOpacity: 0.5,
                     radius: 100,
+                    weight: 1,
                 })
                 circle.setStyle({ 'className': 'point' })
                 circle.addTo(map);
@@ -454,6 +456,7 @@ d3.csv("./data/data.csv").then(function(data) {
                                         fillColor: "#7DBCA5",
                                         fillOpacity: 0.5,
                                         radius: 100,
+                                        weight: 1,
                                     })
                                     circle.addTo(TopolayerGroupPoint);
                                     circle.bindPopup(element.properties.name, {

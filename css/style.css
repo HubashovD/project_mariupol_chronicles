@@ -37,7 +37,7 @@
             margin-left: 5vw !important;
         } */
         #footer {
-            width: 100vw;
+            width: 90vw;
             padding-left: 5vw;
             padding-right: 5vw;
         }
@@ -125,6 +125,9 @@
         }
         .step {
             margin-left: 0 !important;
+        }
+        #footer {
+            width: 50vw;
         }
     }
     
@@ -526,7 +529,6 @@
     
     #footer {
         justify-content: space-between;
-        width: 90vw;
         /* height: 60vh; */
         /* background-color: black; */
         color: #F6F6F4;
