@@ -134,17 +134,16 @@
     .polyStyles {
         fill: 'red';
     }
-    
-    body::-webkit-scrollbar {
+    /* body::-webkit-scrollbar {
         display: none;
-    }
+    } */
     /* Hide scrollbar for IE, Edge and Firefox */
     
     body {
         background-color: #F6F6F4;
-        -ms-overflow-style: none;
+        /* -ms-overflow-style: none; */
         /* IE and Edge */
-        scrollbar-width: none;
+        /* scrollbar-width: none; */
         /* Firefox */
         margin: 0;
     }
